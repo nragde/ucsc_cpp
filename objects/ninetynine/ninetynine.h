@@ -16,6 +16,7 @@ class ninetynine {
             const char* teens[10] = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
             const char* bottle_str[2] = {"bottle", "bottles"};
             void sing();
+            void sing2();
 	private:
             
 };
