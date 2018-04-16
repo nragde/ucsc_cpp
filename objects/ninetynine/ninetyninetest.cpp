@@ -28,7 +28,6 @@ void testbed() {
   // Create a ninetynine object and run the single function it
   ninetynine o;
   o.sing();
-  
 }
 
 /*----------------------------------------------------------------
