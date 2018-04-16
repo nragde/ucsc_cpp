@@ -28,6 +28,7 @@ void testbed() {
   // Create a ninetynine object and run the single function it
   ninetynine o;
   o.sing();
+  //o.sing2();
 }
 
 /*----------------------------------------------------------------
@@ -35,7 +36,7 @@ main
 -----------------------------------------------------------------*/
 int main() {
   testbed() ;
-  cout << "The End!\n" ;
+  cout << "\n\nThe End!\n" ;
   return 0 ;
 }
 
