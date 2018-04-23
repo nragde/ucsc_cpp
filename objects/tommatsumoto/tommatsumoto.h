@@ -8,18 +8,13 @@
 // Define the public and private methods for the object
 class tommatsumoto {
 	public:
-            void find_words();
-            static void read_file();
-            
+        void find_words(const char* filename);
+		void read_file(); 
 	private:
-            //char*& _get_word();
-            //int _word_value();
-            //void _check_word_price(float price, int& word_counter);
-            
-            void _check_word_price(float price, int& word_counter, char*& word);
-            float _character_price(const char cur_char);
-            char _make_lower(const char cur_char);
-            //int
+		void _check_word_price(double price, int& word_counter, const char* word);
+		char _make_lower(const char cur_char);
+		double _character_price(const char cur_char);
+		double _calc_word_price(char* word);
 };
 
 #endif
