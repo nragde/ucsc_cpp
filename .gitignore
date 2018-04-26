@@ -1,2 +1,4 @@
 *.pdf
 objects/working_project
+objects/working_project/build/
+objects/working_project/nbproject/
