@@ -11,6 +11,7 @@ class magicsquare {
         void generate_square(int N);
     private:
         static const int COLS = 100;
+		void _zero_fill(int arr[][COLS], int N);
         void _move_up(int& r, int N);
         void _move_left(int& c, int N);
         void _move_down(int originalr, int originalc, int& r, int& c);
