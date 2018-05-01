@@ -18,6 +18,7 @@ All includes here
 -----------------------------------------------------------------*/
 void testbed() {
     nqueens nqObj;
+    //Find all solutions for 4x4 and 8x8 boards
     for(int N = 4; N <= 8; N += 4){
         cout << "------------------------------------------------" << endl;
         cout << "SOLUTIONS FOR AN " << N << "x" << N << " BOARD: " << endl;
