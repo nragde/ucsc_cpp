@@ -15,13 +15,14 @@ const int MAX_PRINT = 11;
 void magicsquare::generate_square(int N){
     //Check that we can make a square this large
     //assert(N<=COLS);
-	if (N > COLS) {
-		return;
-	}
-    //Dynamically allocate a proper one
+    if (N > COLS) {
+        cout << "Too many columns." << endl;
+        return;
+    }
+    //Dynamically allocate a proper board and zero it out
     int (*magic)[COLS] = new int[N][COLS];
-	_zero_fill(magic, N);
-    //Place the first number
+    _zero_fill(magic, N);
+    //Place the first number in the middle of the first row
     int row = 0;
     int col = N/2;
     magic[row][col] = 1;
@@ -31,24 +32,24 @@ void magicsquare::generate_square(int N){
     }
     int sum = 0;
     bool is_valid = _validate_square(magic, N, sum);
-	if (is_valid) {
-		if (N <= MAX_PRINT) {
-			_print_array(magic, N);
-		}
-		cout << "Sides: " << N << ", Magic Sum = " << sum << endl;
-                cout << endl;
-	}
-	delete[] magic;
+    if (is_valid) {
+        if (N <= MAX_PRINT) {
+            _print_array(magic, N);
+        }
+        cout << "Sides: " << N << ", Magic Sum = " << sum << endl;
+        cout << endl;
+    }
+    delete[] magic;
 }
 
 void magicsquare::_zero_fill(int arr[][COLS], int N) {
-	//Fill the NxN square with zeros, because it'll be garbage otherwise
-	for (int r = 0; r < N; r++) {
-		for (int c = 0; c < N; c++) {
-			//Put spaces between elements in a row. Don't worry about hanging space.
-			arr[r][c] = 0;
-		}
-	}
+    //Fill the NxN square with zeros, because it'll be garbage otherwise
+    for (int r = 0; r < N; r++) {
+        for (int c = 0; c < N; c++) {
+            //Put spaces between elements in a row. Don't worry about hanging space.
+            arr[r][c] = 0;
+        }
+    }
 }
 
 void magicsquare::_move_up(int& r, int n){
@@ -78,75 +79,74 @@ void magicsquare::_move_diagonally(int arr[][COLS], int& r, int& c, int n){
     _move_left(c,n);
     
     //Check if it's filled, and if it is, move straight down instead
-	int val = arr[r][c];
+    int val = arr[r][c];
     if(val != 0){
         _move_down(cur_r, cur_c, r, c);
     }
     //At this point, the new r,c pair should be set
 }
 bool magicsquare::_validate_square(const int arr[][COLS], int N, int& sum){
-	int check_sum = 0;
-	//int same_sums = true;
-	//Get sum of the first row
-	for (int c = 0; c < N; c++) {
-		check_sum += arr[0][c];
-	}
-	//Check remaining rows
-	for (int r = 1; r < N; r++) {
-		int cur_sum = 0;
-		for (int c = 0; c < N; c++) {
-			cur_sum += arr[r][c];
-		}
-		if (cur_sum != check_sum) {
-			return false;
-		}
-	}
-	//Check cols
-	for (int c = 1; c < N; c++) {
-		int cur_sum = 0;
-		for (int r = 0; r < N; r++) {
-			cur_sum += arr[r][c];
-		}
-		if (cur_sum != check_sum) {
-			return false;
-		}
-	}
-	//Check the two diagonals
-	//Top left to bottom right
-	int cur_sum = 0;
-	for (int rc = 0; rc < N; rc++) {
-		cur_sum += arr[rc][rc];
-	}
-	if (cur_sum != check_sum) {
-		return false;
-	}
-	//Bottom left to top right
-	 cur_sum = 0;
-	 for (int c = 0; c < N; c++) {
-		 cur_sum += arr[N - c - 1][c];
-	 }
-	 if (cur_sum != check_sum) {
-		 return false;
-	 }
-	 //All sum checks passed, so update the sum and return true
-	 sum = check_sum;    
-	 return true;
+    int check_sum = 0;
+    //Get sum of the first row
+    for (int c = 0; c < N; c++) {
+        check_sum += arr[0][c];
+    }
+    //Check remaining rows
+    for (int r = 1; r < N; r++) {
+        int cur_sum = 0;
+        for (int c = 0; c < N; c++) {
+            cur_sum += arr[r][c];
+        }
+        if (cur_sum != check_sum) {
+            return false;
+        }
+    }
+    //Check cols
+    for (int c = 1; c < N; c++) {
+        int cur_sum = 0;
+        for (int r = 0; r < N; r++) {
+            cur_sum += arr[r][c];
+        }
+        if (cur_sum != check_sum) {
+            return false;
+        }
+    }
+    //Check the two diagonals
+    //Top left to bottom right
+    int cur_sum = 0;
+    for (int rc = 0; rc < N; rc++) {
+        cur_sum += arr[rc][rc];
+    }
+    if (cur_sum != check_sum) {
+        return false;
+    }
+    //Bottom left to top right
+     cur_sum = 0;
+     for (int c = 0; c < N; c++) {
+        cur_sum += arr[N - c - 1][c];
+     }
+     if (cur_sum != check_sum) {
+        return false;
+     }
+     //All sum checks passed, so update the sum and return true
+     sum = check_sum;    
+     return true;
 }
 
 void magicsquare::_print_array(const int arr[][COLS], int N){
     //Print out a square, NxN array
-	//Figure out how wide the longest number will be
-	int width = 0;
-	for (int i = N*N; i > 0; i = i/10) {
-		width++;
-	}
+    //Figure out how wide the longest number will be
+    int width = 0;
+    for (int i = N*N; i > 0; i = i/10) {
+        width++;
+    }
     for(int r = 0; r < N; r++){
-        for(int c = 0; c < N; c++){
-            //Put spaces between elements in a row. Don't worry about hanging space.
-            cout << setw(width+2) << left << arr[r][c] << " ";
-        }
-        //Put in a new line after a row is complete
-        cout << endl;
+    for(int c = 0; c < N; c++){
+        //Put spaces between elements in a row. Don't worry about hanging space.
+        cout << setw(width+2) << left << arr[r][c] << " ";
+    }
+    //Put in a new line after a row is complete
+    cout << endl;
     }
 }
 

@@ -18,9 +18,10 @@ All includes here
 -----------------------------------------------------------------*/
 void testbed() {
     magicsquare ms;
-	for (int n = 3; n < 150; n += 2) {
-		ms.generate_square(n);
-	}
+    //
+    for (int n = 3; n < 100; n += 2) {
+        ms.generate_square(n);
+    }
 }
 
 /*----------------------------------------------------------------
