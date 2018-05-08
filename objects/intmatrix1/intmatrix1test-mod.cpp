@@ -140,8 +140,8 @@ void test_mult() {
 test bed
 -----------------------------------------------------------------*/
 void testbed() {
-  test_init_fini();
-  test_add() ;
+  //test_init_fini();
+  //test_add() ;
   test_mult() ;
 }
 

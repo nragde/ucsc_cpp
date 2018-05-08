@@ -94,6 +94,10 @@ void intmatrix1::set_arr_val(int row, int col, int val){
     _arr[row*_cols + col] = val;
 }
 
+void intmatrix1::raw_set_arr_val(int ind, int val){
+    _arr[ind] = val;
+}
+
 
 bool intmatrix1::isEmpty(){
     return _is_empty;
@@ -122,6 +126,7 @@ bool intmatrix1::isEqual(intmatrix1 that){
 
 intmatrix1 intmatrix1::add(intmatrix1 that){
     intmatrix1 sum_arr;
+    //What happens if it's just a single number?
     //Dimensions have to be the same
     if ((this->_rows == that.get_rows()) && (this->_cols == that.get_cols())){
         sum_arr.init(this->_rows, this->_cols);
@@ -139,8 +144,68 @@ intmatrix1 intmatrix1::add(intmatrix1 that){
     return sum_arr;
 }
 
-intmatrix1 intmatrix1::mult(intmatrix1 a){
+intmatrix1 intmatrix1::mult(intmatrix1 that){
     intmatrix1 prod_arr;
+//    //Check if either is a "scalar" i.e. just a single value?
+//    if(this->_rows == 1 && this->_cols == 1){
+//        int scalar = this->get_arr_val(0,0);
+//        prod_arr.init(that.get_rows(), that.get_cols(), 0);
+//        for(int r = 0; r < that.get_rows(); r++){
+//            for(int c = 0; c < that.get_cols(); c++){
+//                int val = that.get_arr_val(r,c);
+//                prod_arr.set_arr_val(r, c, val*scalar);
+//            }
+//        }
+//        return prod_arr;
+//    }
+//    if(that.get_rows() == 1 && that.get_cols() == 1){
+//        int scalar = that.get_arr_val(0,0);
+//        prod_arr.init(this->_rows, this->_cols, 0);
+//        for(int r = 0; r < this->_rows; r++){
+//            for(int c = 0; c < this->_cols; c++){
+//                int val = this->get_arr_val(r,c);
+//                prod_arr.set_arr_val(r, c, val*scalar);
+//            }
+//        }
+//        return prod_arr;
+//    }
+    //Do the dimension check
+    if(this->_cols == that.get_rows()){
+        //The dimensions match! Now do the math...
+        //The _rows and _cols are set by the _rows of this and the _cols of that
+        //Initialize to 0 to start with a clean matrix
+        prod_arr.init(this->_rows, that.get_cols(), 0);
+        //Multiply the corresponding row of THIS by the col of THAT
+        //The first row of prod_arr requires the first row of THIS, and so on
+        for(int r = 0; r < this->_rows; r++){
+            //Get the row of THIS
+            int this_row[this->_cols];
+            for(int tc = 0; tc < _cols; tc++){
+                this_row[tc] = this->get_arr_val(r, tc);
+            }
+            //Now do the math for each col of THAT, by going down rows
+            for(int cc = 0; cc < that.get_cols(); cc++){
+                int that_col[that.get_rows()];
+                for(int rr = 0; rr < that.get_rows(); rr++){
+                    that_col[rr] = that.get_arr_val(rr,cc);
+                }
+                //At this point, I have the current row and the current col
+                int cur_num = 0;
+                for(int ind = 0; ind < that.get_rows(); ind++){
+                    int this_val = this_row[ind];
+                    int that_val = that_col[ind];
+                    int prod = this_val * that_val;
+                    cur_num += prod;
+//                    cur_num += this_row[ind] * that_col[ind];
+                }
+                prod_arr.set_arr_val(r, cc, cur_num);
+            }
+        }
+    }
+    else{
+        //The dimensions do NOT allow for valid multiplication, so empty arr
+        prod_arr.init();
+    }
     return prod_arr;
 }
 
@@ -286,6 +351,11 @@ bool intmatrix1::_insert_str_vals(const char* arr_str){
         within_number = false;
         cur_col_num++;
     }
+    //If it's a single row of numbers, make sure we mark that
+    if(num_rows == 0 && cur_col_num != 0){
+        //num_rows++;
+        num_cols = cur_col_num;
+    }
     //Need to verify that the last row is also valid
     if(!(num_cols == cur_col_num)){
             return false;
@@ -295,6 +365,10 @@ bool intmatrix1::_insert_str_vals(const char* arr_str){
     }
     //--------------------------------------------------
     //At this point, we know the number of cols and rows
+    //If it's an empty string, the above may pass through without failing
+    if(num_rows == 0 || num_cols == 0){
+        return false;
+    }
     //We will now loop through the string, again, and add values as appropriate
     int cur_num = 0;
     _arr = new int[num_rows*num_cols];

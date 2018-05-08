@@ -21,6 +21,7 @@ class intmatrix1 {
         int get_cols();
         int get_arr_val(int row, int col);
         void set_arr_val(int row, int col, int val);
+        void raw_set_arr_val(int ind, int val);
     private:
         bool _is_empty;
         int _rows;
@@ -30,15 +31,15 @@ class intmatrix1 {
         bool _insert_str_vals(const char* arr_str);
         int _char_to_int(const char* int_str);
         
-        static const int COLS = 8;
-        int _find_queen(const int arr[][COLS], int row, int N);
-        void _zero_fill_row(int arr[][COLS], int row, int N);
-        void _zero_fill(int arr[][COLS], int N);
-        bool _check_square(const int arr[][COLS], int r, int c, int N);
-        bool _validate_solution(const int arr[][COLS], int N);
-        void _print_solution(const int arr[][COLS], int N);
-        void _print_array(const int arr[][COLS], int N);
-        void _temp_fill(int arr[][COLS]);
+        
+//        int _find_queen(const int arr[][COLS], int row, int N);
+//        void _zero_fill_row(int arr[][COLS], int row, int N);
+//        void _zero_fill(int arr[][COLS], int N);
+//        bool _check_square(const int arr[][COLS], int r, int c, int N);
+//        bool _validate_solution(const int arr[][COLS], int N);
+//        void _print_solution(const int arr[][COLS], int N);
+//        void _print_array(const int arr[][COLS], int N);
+//        void _temp_fill(int arr[][COLS]);
 };
 
 #endif
