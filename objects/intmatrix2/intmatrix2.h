@@ -46,6 +46,7 @@ class intmatrix2 {
         
         bool _insert_str_vals(const char* arr_str);
         int _char_to_int(const char* int_str);
+        int _rcind(int r, int c) const;
 };
 
 #endif

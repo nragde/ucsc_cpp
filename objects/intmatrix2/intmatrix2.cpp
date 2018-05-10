@@ -11,7 +11,7 @@ All includes here
 #include "intmatrix2.h"
 //#define DEBUG0 1
 //#define DEBUGTEST 1
-#define DEBUG_PRINT_STATES 1
+//#define DEBUG_PRINT_STATES 1
 
 //Two constructors, one for ints and one for string
 intmatrix2::intmatrix2(int row, int col, int val):
@@ -174,14 +174,70 @@ bool intmatrix2::isEqual(const intmatrix2 that) const{
     return is_equal;
 }
 
-intmatrix2 intmatrix2::add(const intmatrix2 mat) const{
-    intmatrix2 sum_mat;
-    return sum_mat;
+intmatrix2 intmatrix2::add(const intmatrix2 that) const{
+//    intmatrix2 sum_mat;
+//    intmatrix2 sum_arr;
+    //What happens if it's just a single number?
+    //Dimensions have to be the same
+    if ((this->_rows == that._rows) && (this->_cols == that._cols)){
+        intmatrix2 sum_arr(this->_rows, this->_cols);
+        for(int r = 0; r < this->_rows; r++){
+            for(int c = 0; c < this->_cols; c++){
+                int sum_val = this->_arr[_rcind(r,c)] + that._arr[_rcind(r,c)];
+                //sum_arr.set_arr_val(r,c, sum_val);
+                sum_arr._arr[_rcind(r,c)] = sum_val;
+            }
+        }
+        return sum_arr;
+    }
+    intmatrix2 sum_arr;
+    
+    return sum_arr;
 }
 
-intmatrix2 intmatrix2::mult(const intmatrix2 mat) const{
-    intmatrix2 prod_mat;
-    return prod_mat;
+intmatrix2 intmatrix2::mult(const intmatrix2 that) const{
+//    intmatrix2 prod_mat;
+//    intmatrix2 prod_arr;
+    //Do the dimension check
+    if(this->_cols == that._rows){
+        //The dimensions match! Now do the math...
+        //The _rows and _cols are set by the _rows of this and the _cols of that
+        //Initialize to 0 to start with a clean matrix
+        intmatrix2 prod_arr(this->_rows, that._cols, 0);
+        //Multiply the corresponding row of THIS by the col of THAT
+        //The first row of prod_arr requires the first row of THIS, and so on
+        for(int r = 0; r < this->_rows; r++){
+            //Get the row of THIS
+            int this_row[this->_cols];
+            for(int tc = 0; tc < _cols; tc++){
+                this_row[tc] = this->_arr[_rcind(r,tc)];
+            }
+            //Now do the math for each col of THAT, by going down rows
+            for(int cc = 0; cc < that._cols; cc++){
+                int that_col[that._rows];
+                for(int rr = 0; rr < that._rows; rr++){
+                    that_col[rr] = that._arr[_rcind(rr,cc)];
+                }
+                //At this point, I have the current row and the current col
+                int cur_num = 0;
+                for(int ind = 0; ind < that._rows; ind++){
+                    int this_val = this_row[ind];
+                    int that_val = that_col[ind];
+                    int prod = this_val * that_val;
+                    cur_num += prod;
+                }
+                prod_arr._arr[_rcind(r,cc)] = cur_num;
+            }
+        }
+        return prod_arr;
+    }
+    //The dimensions do NOT allow for valid multiplication, so empty arr
+    intmatrix2 prod_arr;
+    return prod_arr;
+}
+
+int intmatrix2::_rcind(int r, int c) const{
+    return r*_cols + c;
 }
 
 int intmatrix2::_char_to_int(const char* int_str){
