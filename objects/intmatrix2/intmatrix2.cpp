@@ -45,6 +45,10 @@ intmatrix2::intmatrix2(const char* arr_str):
 #ifdef DEBUG_PRINT_STATES
     cout << "In the (char*) constructor!" << endl;
 #endif
+    bool is_valid = _insert_str_vals(arr_str);
+    if(is_valid){
+        _is_empty = false;
+    }
 }
 //Destructor
 intmatrix2::~intmatrix2(){
@@ -150,8 +154,24 @@ bool intmatrix2::isEmpty() const{
     return _is_empty;
 }
 
-bool intmatrix2::isEqual(const intmatrix2 mat) const{
-    return true;
+bool intmatrix2::isEqual(const intmatrix2 that) const{
+    bool is_equal = true;
+    //Dimensions have to be the same
+    if ((this->_rows == that._rows) && (this->_cols == that._cols)){
+        //Now check element by element. The values should be same for the same
+        //(row,col) pairs. If even one is off, return false.
+        for(int r = 0; r < this->_rows; r++){
+            for(int c = 0; c < this->_cols; c++){
+                if(this->_arr[r*(this->_cols)+c] != that._arr[r*that._cols+c]){
+                    return false;
+                }
+            }
+        }
+    }
+    else{
+        return false;
+    }
+    return is_equal;
 }
 
 intmatrix2 intmatrix2::add(const intmatrix2 mat) const{
@@ -164,6 +184,133 @@ intmatrix2 intmatrix2::mult(const intmatrix2 mat) const{
     return prod_mat;
 }
 
+int intmatrix2::_char_to_int(const char* int_str){
+    return int(*int_str - '0');
+}
+
+bool intmatrix2::_insert_str_vals(const char* arr_str){
+    const char* init_arr_str = arr_str; //shallow copy of beginning of char* arr
+    int num_rows = 0;
+    bool first_row = true;
+    int num_cols = 0;
+    int cur_col_num = 0;
+    bool within_number = false;
+    
+    while(*arr_str){
+
+        //Check what the current character is
+        //Is it a space
+        if(*arr_str == ' '){
+            if(within_number){
+                within_number = false;
+                cur_col_num++;
+                //cur_col_num = 0;
+            }
+        }
+        //Is it a |
+        else if (*arr_str == '|'){
+            //The first row defines how many numbers are for "cols"
+            if(within_number){
+                within_number = false;
+                cur_col_num++;
+            }
+            if(first_row){
+                first_row = false;
+                num_cols = cur_col_num;
+            }
+            //Every row must have the same number of columns
+            if(!(num_cols == cur_col_num)){
+                return false;
+            }
+            cur_col_num = 0;
+            num_rows++;
+        }
+        //Is it a number?
+        else if (*arr_str >= '0' && *arr_str <= '9'){
+            within_number = true;
+            
+        }
+        //If it's anything else, not valid
+        else{
+            return false;
+        }
+        arr_str++;
+    }
+    //Tweak the column count if the last character is a number
+    if(within_number){
+        within_number = false;
+        cur_col_num++;
+    }
+    //If it's a single row of numbers, make sure we mark that
+    if(num_rows == 0 && cur_col_num != 0){
+        //num_rows++;
+        num_cols = cur_col_num;
+    }
+    //Need to verify that the last row is also valid
+    if(!(num_cols == cur_col_num)){
+            return false;
+    }
+    else{
+        num_rows++;
+    }
+    //--------------------------------------------------
+    //At this point, we know the number of cols and rows
+    //If it's an empty string, the above may pass through without failing
+    if(num_rows == 0 || num_cols == 0){
+        return false;
+    }
+    //We will now loop through the string, again, and add values as appropriate
+    int cur_num = 0;
+    _arr = new int[num_rows*num_cols];
+    _rows = num_rows;
+    _cols = num_cols;
+    int arr_ind = 0;
+    arr_str = init_arr_str;
+    while(*arr_str){
+        //Check what the current character is
+        //Is it a space
+        if(*arr_str == ' '){
+            //Space between numbers, so enter the current number into the next spot
+            if(within_number){
+                within_number = false;
+                _arr[arr_ind++] = cur_num;
+                cur_num = 0;
+            }
+        }
+        //Is it a |
+        else if (*arr_str == '|'){
+            //The first row defines how many numbers are for "cols"
+            if(within_number){
+                within_number = false;
+                _arr[arr_ind++] = cur_num;
+                cur_num = 0;
+            }
+        }
+        //Is it a number?
+        else if (*arr_str >= '0' && *arr_str <= '9'){
+            //Double digit number, so shift the current number left by one
+            if(within_number){
+                cur_num *= 10;
+            }
+            within_number = true;
+            cur_num += _char_to_int(arr_str);
+            
+        }
+        //If it's anything else, not valid
+        else{
+            return false;
+        }
+        arr_str++;
+    }
+    //Tweak the column count if the last character is a number
+    if(within_number){
+        within_number = false;
+        _arr[arr_ind++] = cur_num;
+        cur_num = 0;
+    }
+    
+    return true;
+}
 
 #if 0
 //void intmatrix2::init(int row = 0, int col = 0, int val = 0);
