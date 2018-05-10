@@ -142,12 +142,12 @@ void test_mult() {
 test bed
 -----------------------------------------------------------------*/
 void testbed() {
-  //intmatrix2::makeShowOn() ;
-    intmatrix2 m1(3,-4,5);
+  //  intmatrix2::makeShowOn() ;
+   // intmatrix2 m1(3,-4,5);
    // intmatrix2 m2(m1);
   test_init_fini();
   test_add();
-  //test_mult();
+  test_mult();
 }
 
 /*----------------------------------------------------------------

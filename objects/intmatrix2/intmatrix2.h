@@ -25,15 +25,6 @@ class intmatrix2 {
         
         intmatrix2 add(const intmatrix2 mat) const;
         intmatrix2 mult(const intmatrix2 mat) const;
-//        intmatrix2 add(intmatrix2 a);
-//        intmatrix2 mult(intmatrix2 a);
-//        void print(const char * str);
-        //The following are public functions to get/set private elements
-        int get_rows();
-        int get_cols();
-        int get_arr_val(int row, int col);
-        void set_arr_val(int row, int col, int val);
-        void raw_set_arr_val(int ind, int val);
     private:
         bool _is_empty;
         int _rows;

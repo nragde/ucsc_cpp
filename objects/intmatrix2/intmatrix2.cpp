@@ -12,6 +12,7 @@ All includes here
 //#define DEBUG0 1
 //#define DEBUGTEST 1
 //#define DEBUG_PRINT_STATES 1
+//#define DEBUG_1 1
 
 //Two constructors, one for ints and one for string
 intmatrix2::intmatrix2(int row, int col, int val):
@@ -123,33 +124,6 @@ void intmatrix2::_copy(const intmatrix2& orig_mat){
     }
 }
 
-int intmatrix2::get_rows(){
-    return _rows;
-}
-
-int intmatrix2::get_cols(){
-    return _cols;
-}
-
-int intmatrix2::get_arr_val(int row, int col)
-{
-    assert(row>=0);
-    assert(col>=0);
-    if(!_is_empty){
-        return _arr[row*_cols + col];
-    }
-    return -1;
-}
-
-void intmatrix2::set_arr_val(int row, int col, int val){
-    _arr[row*_cols + col] = val;
-}
-
-void intmatrix2::raw_set_arr_val(int ind, int val){
-    _arr[ind] = val;
-}
-
-
 bool intmatrix2::isEmpty() const{
     return _is_empty;
 }
@@ -183,9 +157,9 @@ intmatrix2 intmatrix2::add(const intmatrix2 that) const{
         intmatrix2 sum_arr(this->_rows, this->_cols);
         for(int r = 0; r < this->_rows; r++){
             for(int c = 0; c < this->_cols; c++){
-                int sum_val = this->_arr[_rcind(r,c)] + that._arr[_rcind(r,c)];
+                int sum_val = this->_arr[this->_rcind(r,c)] + that._arr[that._rcind(r,c)];
                 //sum_arr.set_arr_val(r,c, sum_val);
-                sum_arr._arr[_rcind(r,c)] = sum_val;
+                sum_arr._arr[sum_arr._rcind(r,c)] = sum_val;
             }
         }
         return sum_arr;
@@ -198,6 +172,32 @@ intmatrix2 intmatrix2::add(const intmatrix2 that) const{
 intmatrix2 intmatrix2::mult(const intmatrix2 that) const{
 //    intmatrix2 prod_mat;
 //    intmatrix2 prod_arr;
+    //Scalars are an edge case
+    if(this->_rows == 1 && this->_cols ==1){
+        int scalar = this->_arr[0];
+        for(int r = 0; r < that._rows; r++){
+            for(int c = 0; c < that._cols; c++){
+                that._arr[that._rcind(r,c)] *= scalar;
+#ifdef DEBUG_1
+                cout << that << endl;
+#endif 
+            }
+        }
+        return that;
+    }
+    else if(that._rows == 1 && that._cols ==1){
+        int scalar = that._arr[0];
+        for(int r = 0; r < this->_rows; r++){
+            for(int c = 0; c < this->_cols; c++){
+                this->_arr[this->_rcind(r,c)] *= scalar;
+#ifdef DEBUG_1
+                cout << *this << endl;
+#endif
+            }
+        }
+        return *this;
+    }
+    
     //Do the dimension check
     if(this->_cols == that._rows){
         //The dimensions match! Now do the math...
@@ -210,13 +210,13 @@ intmatrix2 intmatrix2::mult(const intmatrix2 that) const{
             //Get the row of THIS
             int this_row[this->_cols];
             for(int tc = 0; tc < _cols; tc++){
-                this_row[tc] = this->_arr[_rcind(r,tc)];
+                this_row[tc] = this->_arr[this->_rcind(r,tc)];
             }
             //Now do the math for each col of THAT, by going down rows
             for(int cc = 0; cc < that._cols; cc++){
                 int that_col[that._rows];
                 for(int rr = 0; rr < that._rows; rr++){
-                    that_col[rr] = that._arr[_rcind(rr,cc)];
+                    that_col[rr] = that._arr[that._rcind(rr,cc)];
                 }
                 //At this point, I have the current row and the current col
                 int cur_num = 0;
@@ -226,7 +226,7 @@ intmatrix2 intmatrix2::mult(const intmatrix2 that) const{
                     int prod = this_val * that_val;
                     cur_num += prod;
                 }
-                prod_arr._arr[_rcind(r,cc)] = cur_num;
+                prod_arr._arr[prod_arr._rcind(r,cc)] = cur_num;
             }
         }
         return prod_arr;
