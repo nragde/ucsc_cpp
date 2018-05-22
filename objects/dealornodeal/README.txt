@@ -2,7 +2,8 @@ Download the game. Play and then write the code.
 All the inputs like 
 1. Number of suitcases
 2. Money in suitcase
-3. The number of rounds must be programmable.
+3. The number of rounds 
+must be programmable.
 
 Implement the above game in four flavors:
 1. Single interactive game

@@ -10,15 +10,16 @@ All includes here
 -----------------------------------------------------------------*/
 #include "dealornodeal.h"
 //#define DEBUG_PRINTS 1
-
-const int NUM_CASES = 26;
+//#define DEBUG_INTERACTIVE
+//#define DEBUG_AUTOMATED 1
+//#define DEBUG_ROUNDS
 
 /*--------------------------------------------------------
  * SUITCASE
 ----------------------------------------------------------*/
 //Constructor
 suitcase::suitcase(unsigned int num, double val):
-    _number(num), _opened(false), _value(val){
+    _number(num), _opened(false), _value(val), _first_picked(false){
 #ifdef DEBUG_PRINTS
     cout << "In suitcase constructor: #" << _number << ", Value $" << _value << ", Opened: " << _opened << endl;
 #endif
@@ -33,7 +34,7 @@ suitcase::~suitcase(){
 }
 //To handle couts
 ostream& operator<<(ostream& o, const suitcase& one_case){
-    o << "Case #" << one_case._number << ": $" << setprecision(numeric_limits<double>::digits10) << one_case._value << " (" << ( (one_case._opened) ? "Opened)":"Unopened)") <<endl ;
+    o << "Case #" << one_case._number << ": $" << fixed << setprecision(2) << one_case._value << " (" << ( (one_case._opened) ? "Opened)":"Unopened)") <<endl ;
     return o;
 }
 //Note: no way to "close" a case once it's opened
@@ -53,6 +54,12 @@ bool suitcase::is_opened() const{
 void suitcase::set_value(double new_val){
     assert(new_val >= 0.0);
     _value = new_val;
+}
+bool suitcase::is_first_picked() const{
+    return _first_picked;
+}
+void suitcase::set_first_picked(){
+    _first_picked = true;
 }
 
 
@@ -90,7 +97,7 @@ ostream& operator<<(ostream& o, const list_of_suitcases& case_list){
     for(int i = 0; i < case_list._maxsize; i++){
         // Check if current case is open
         suitcase* tmp = case_list._case_list[i];
-        if(not tmp->is_opened()){
+        if(not tmp->is_opened() and not case_list._case_list[i]->is_first_picked()){
             o << tmp->get_number();
             if(i < case_list._maxsize-1){
                 o << ", ";
@@ -98,12 +105,12 @@ ostream& operator<<(ostream& o, const list_of_suitcases& case_list){
         }
     }
     o << "}" << endl;
-    o << "Winnings on the Board: {";
+    o << "Potential Winnings on the Board: {";
     for(int i = 0; i < case_list._maxsize; i++){
         //Print all of the available values on the board
         double cur_val = case_list._remaining_vals[i];
         if(cur_val != -1){
-            o << "$" << setprecision(numeric_limits<double>::digits10) << cur_val;
+            o << "$" << fixed << setprecision(2) << cur_val;
             if(i < case_list._maxsize-1){
                 o << ", ";
             }
@@ -112,7 +119,20 @@ ostream& operator<<(ostream& o, const list_of_suitcases& case_list){
     o << "}" << endl;
     return o;
 }
-////int get_num_cases(){return _num_cases;}
+
+//True if at least one is unopened
+//False if all are opened
+list_of_suitcases::operator bool() const{
+    bool at_least_one_unopened = false;
+    for(int i = 0; i < _maxsize; i++){
+        if(not _case_list[i]->is_opened()){
+            at_least_one_unopened = true;
+            break;
+        }
+    }
+    return at_least_one_unopened;
+}
+
 //For the banker's deal, return the average of the unopened boxes
 double list_of_suitcases::get_banker_deal(){
     double total_case_sum = 0.0;
@@ -137,12 +157,22 @@ void list_of_suitcases::_release(){
     _maxsize = 0;
     
 }
-void list_of_suitcases::open_case(int case_num){
+double list_of_suitcases::open_case(int case_num){
     assert(case_num >= 0 && case_num < _maxsize);
     suitcase* s = _case_list[case_num];
     s->open_case();
     _update_remaining_vals(s);
-    cout << *s;
+    return s->get_value();
+    //cout << *s;
+}
+
+void list_of_suitcases::set_first_picked(int case_num){
+    assert(case_num > 0 && case_num <= _maxsize);
+    _case_list[case_num-1]->set_first_picked();
+}
+
+bool list_of_suitcases::is_opened(int case_num){
+    return _case_list[case_num]->is_opened();
 }
 
 void list_of_suitcases::_update_remaining_vals(suitcase* case_ptr){
@@ -154,7 +184,7 @@ void list_of_suitcases::_update_remaining_vals(suitcase* case_ptr){
 }
 void list_of_suitcases::_shuffle_cases(int number_of_swaps){
     //Randomly swap case values number_of_swaps times
-    Random randomizer;
+//    Random randomizer;
     for(int i = 0; i < number_of_swaps; i++){
         int caseA = randomizer.get_random_number(0, _maxsize-1);
         int caseB = randomizer.get_random_number(0, _maxsize-1);
@@ -189,6 +219,11 @@ void list_of_suitcases::_swap(int a, int b){
 #endif
     }
 }
+void list_of_suitcases::get_case(int case_num){
+    suitcase* a = _case_list[case_num];
+    cout << a->is_first_picked();
+    cout << *a;    
+}
 
 //double default_case_vals[] = {0.01, 1.0, 5.0, 10.0, 25.0, 50.0, 75.0, 100.0, 200.0, 300.0, 400.0, 500.0 750.0, 1000.0, 5000.0, 10000.0, 25000.0, 50000.0, 75000.0, 100000.0, 200000.0, 300000.0, 400000.0, 500000.0, 750000.0, 1000000.0};
 /*--------------------------------------------------------
@@ -196,29 +231,335 @@ DEAL OR NO DEAL
  * ----------------------------------------------------------*/
 bool dealornodeal::_show = false;
 bool dealornodeal::_interactive = true;
-dealornodeal::dealornodeal(const unsigned int num_cases):
- _num_cases(num_cases){
+//Constructor
+dealornodeal::dealornodeal(const unsigned int num_cases, double* case_values_list, unsigned int num_rounds):
+ _num_cases(num_cases), _rounds(num_rounds), _game_cases(case_values_list, num_cases){
     if(show()){
         cout << "In dealornodeal constructor! " << endl;
+        cout << _game_cases;
     }
-    assert(_num_cases > 0);
-    
+    assert(_num_cases > 2 && "Please provide more cases.");
+    assert(_rounds > 0);
+    //Determine cases per round
+    _determine_cases_per_round();
+//            list_of_suitcases _game_cases;
+//        const unsigned int _num_cases;
+//        unsigned int _rounds;
+//        unsigned int* _cases_per_round;
 }
+
 dealornodeal::~dealornodeal(){
     if(show()){
         cout << "In dealornodeal destructor! " << endl;
     }
-    
+    _release();
 }
 ostream& operator<<(ostream& o, const dealornodeal& game){
     return o;
 
 }
-void dealornodeal::play(){
+double dealornodeal::play(){
+    //cout.precision(2);
     //# suitcases, money in cases, and rounds have been inputted in the constructor
-    
-
+    //Pick a case
+    _pick_safe_case();
+#ifdef DEBUG_INTERACTIVE
+    _game_cases.get_case(_saved_case_num);
+    _game_cases.get_case(_saved_case_num-1);
+    _game_cases.get_case(_saved_case_num+1);
+#endif
+    //Now, play each round. There should be just two cases left
+    for(int round = 0; round < _rounds; round++){
+        //Print out state at this point
+        if(show()){
+            cout << _game_cases;
+        }
+        //Figure out how many cases need to be opened this round
+        int cases_in_round = _cases_per_round[round];
+        if(show()){
+            cout << "Pick " << cases_in_round << " Cases:" << endl;
+        }
+        //Open the proper number of cases for this round
+        for(int cur_case = 0; cur_case < cases_in_round; cur_case++){
+//            int cur_case_num = _pick_a_case();
+            _pick_a_case();
+            //_game_cases.open_case(cur_case_num);
+            if(show()){
+                cout << _game_cases;
+            }
+        }
+        //Get the banker's deal
+        double bankers_deal = _game_cases.get_banker_deal();
+        //Ask deal or no deal (always no deal, so just note it)
+        if(show()){
+            cout << "Banker's deal: $" << fixed << setprecision(2) << bankers_deal << endl;
+            cout << "Deal... or No Deal?\nWe're playing to the end... NO DEAL!" << endl;
+        }
+    }
+    //Final banker's deal
+    //Get the banker's deal
+    double bankers_deal = _game_cases.get_banker_deal();
+    //Ask deal or no deal (always no deal, so just note it)
+    if(show()){
+        cout << "Banker's deal: $" << fixed << setprecision(2) << bankers_deal << endl;
+            cout << "Deal... or No Deal?\nWe're playing to the end... NO DEAL!" << endl;
+    }
+    //Pick which one you'll keep (your case or the other case)
+    int winning_case = _pick_final_case();
+    //This is the winnings!
+    double winning_amount = _game_cases.open_case(winning_case-1);
+    if(show()){
+        cout << "You opened case #" << winning_case << " to win $" << fixed << setprecision(2) << winning_amount << endl;
+    }
+    return winning_amount;
 }
+
+void dealornodeal::_release(){
+    delete [] _cases_per_round;
+}
+
+void dealornodeal::_determine_cases_per_round(){
+    assert(_rounds > 0);
+    //The last round HAS to be 1 case (so that it's that case and the chosen case)
+    
+//    6	5	4	3	2	1	1	1	1
+#ifdef DEBUG_AUTOMATED //|| DEBUG_INTERACTIVE
+    _rounds = 9;
+    _cases_per_round = new unsigned int[_rounds];
+    int my_rounds[] = {6, 5, 4, 3, 2, 1, 1, 1, 1};
+    for(int i = 0; i < _rounds; i++){
+        
+        _cases_per_round[i] = my_rounds[i];
+    }
+#elif OTHER_THING   
+    //Last round has to be 1 case (to pick between the last one and the chosen one)
+    int cases_we_want = _num_cases - 1; //Adjust for the first picked case
+    //Sum up the remaining rounds from 1
+    int rounds_case_sum = 0;
+    int cases_per_round = 1;
+    cases_we_want -= 1; //Adjust for the last round which is a 1
+    int rounds_before_over = -1;
+    for(int rr = 0; rr < _rounds-1; rr++){
+        cases_per_round++; //@ start, increase for the current round (2) for the second one
+        rounds_case_sum += cases_per_round;
+        //If we've crossed the threshold, we need to adjust down
+        if(rounds_case_sum > cases_we_want){
+            rounds_before_over = rr;
+            break;
+        }
+    }
+    // If we're higher than cases_we_want, subtract off the top into end rounds of 1
+    if(rounds_case_sum > cases_we_want){
+        //We know how many rounds we went before we went over (rounds_before_over)
+        //We know how how many cases were added in that round (cases_per_round)
+        //We have more rounds left and we need to add rounds of 1 until we
+    }
+    // If we're lower than cases_we_want, add to the top of the early rounds
+    else if (rounds_case_sum < cases_we_want){
+        
+    }
+    else{
+        assert(false && "exactly equal, what is this?");
+    }
+    //Per round: FLOOR((Total cases / remaining rounds) * 2)
+    _cases_per_round = new unsigned int[_rounds];
+    int round_ind = 0;
+    unsigned int remaining_cases = _num_cases;
+    for(int i = _rounds; i > 0; i--){
+        //The int will chop off the decimals i.e. flooring it
+        int current_cases_per_round(remaining_cases/i*2);
+        remaining_cases -= current_cases_per_round;
+        _cases_per_round[round_ind] = current_cases_per_round;
+    }
+    if(show()){
+        //Print out the cases per round
+    }
+#else
+    //Last round has to be 1 case (to pick between the last one and the chosen one)
+    int cases_we_want = _num_cases - 1; //Adjust for the first picked case
+    cases_we_want -= 1; //Adjust for the last round which is a 1
+    //The last round is always a "pick one", so we need to figure out how many that is
+    _cases_per_round = new unsigned int[_rounds - 1]; 
+    unsigned int val = _rounds - 1;
+    for(int i = 0; i < _rounds -1; i++){
+        _cases_per_round[i] = val--; 
+    }
+#ifdef DEBUG_ROUNDS
+    _print_arr(_cases_per_round, _rounds-1);
+#endif
+    
+    //Check the sum. If it's under what we want, then we'll add stuff until we're good
+    //If the sum is over what we want, we'll subtract until we're good
+    if(_sum_arr(_cases_per_round, _rounds-1) > cases_we_want){
+        //Subtract from the rounds until we reach the proper number
+        while(_sum_arr(_cases_per_round, _rounds-1) != cases_we_want){
+            //Subtract one case to a single round and see if we've met the case. If not, keep going.
+            for(int i = 0; i < _rounds -1; i++){
+                //Do not subtract if the round is already for just a single case
+                if(_cases_per_round[i] != 1){  
+                    _cases_per_round[i] -= 1;
+                }
+                if(_sum_arr(_cases_per_round, _rounds-1) == cases_we_want){
+                    break;
+                }
+#ifdef DEBUG_ROUNDS
+                _print_arr(_cases_per_round, _rounds-1);
+#endif
+            }
+        }
+
+    }
+    else if(_sum_arr(_cases_per_round, _rounds-1) < cases_we_want){
+        //Add to the rounds until we reach the proper number
+        while(_sum_arr(_cases_per_round, _rounds-1) != cases_we_want){
+            //Add one case to a single round and see if we've met the case. If not, keep going.
+            for(int i = 0; i < _rounds -1; i++){
+                _cases_per_round[i] += 1;
+                if(_sum_arr(_cases_per_round, _rounds-1) == cases_we_want){
+                    break;
+                }
+#ifdef DEBUG_ROUNDS
+                _print_arr(_cases_per_round, _rounds-1);
+#endif
+            }
+            
+        }
+    }
+#ifdef DEBUG_ROUNDS
+    _print_arr(_cases_per_round, _rounds-1);
+#endif
+    //If the sum is equal, then we've coincidentally found the proper number and we're good to go!    
+#endif
+}
+
+int dealornodeal::_sum_arr(unsigned int arr[], int len){
+    int mysum = 0;
+    for(int i = 0; i < len; i++){
+        mysum += arr[i];
+    }
+    return mysum;    
+}
+
+void dealornodeal::_print_arr(unsigned int arr[], int len){
+    for(int i = 0; i < len; i++){
+        cout << arr[i] << ", ";
+    }
+    cout << endl;
+}
+
+void dealornodeal::_pick_safe_case(){
+    bool valid_num = false;
+    unsigned int case_num;
+//    Random randomizer; //Do this one, or else seeding will mess up
+    while(!valid_num){
+        if(interactive()){
+            case_num = _get_user_input("Please pick a case: ");
+        }
+        else{
+            //Automatically pick a case to save off
+            case_num = randomizer.get_random_number(0, _num_cases-1);
+        }
+        if(case_num > 0 && case_num <= _num_cases){
+            valid_num = true;
+        }
+    }
+    _saved_case_num = case_num;
+    _game_cases.set_first_picked(_saved_case_num);
+    if(show()){
+        cout << "Saved case #" << _saved_case_num << endl;
+    }
+}
+
+int dealornodeal::_pick_a_case(){
+    int case_num;
+    bool valid_input = false;
+//    Random randomizer; //Do this here, or else seeding will mess up
+    while(!valid_input){
+        if(interactive()){
+            case_num = _get_user_input("Pick a case to open: ");
+        }
+        else{
+            case_num = randomizer.get_random_number(0, _num_cases);
+        }
+        //We should have a number, so check that it's a valid one
+        if(case_num>0 && case_num <= _num_cases){
+            //The number itself is correct, so check if the case is already open
+            //It also cannot be the case that was initially saved off
+            if(!_game_cases.is_opened(case_num-1) and case_num!= _saved_case_num){
+                //Not opened, so we're good to go
+                valid_input = true;
+            }
+        }
+        //If valid_input is still false, get another number!
+    }
+    double case_amount = _game_cases.open_case(case_num-1);
+    if(show()){
+        cout << "Opening case #" << case_num << " ($" << fixed << setprecision(2) << case_amount << ")" << endl;
+    }
+    return case_num;    
+}
+
+int dealornodeal::_pick_final_case(){
+    int case_num;
+    bool valid_input = false;
+//    Random randomizer; //Do this here, or else seeding will mess up
+    //The pick is for which one is the winnings
+    if(show()){
+        cout << _game_cases;
+        cout << "Your saved case: " << _saved_case_num << endl;
+    }
+    
+    while(!valid_input){
+        if(interactive()){
+            case_num = _get_user_input("Pick the case you want to take as winnings: ");
+        }
+        else{
+            case_num = randomizer.get_random_number(0, _num_cases);
+#ifdef DEBUG_AUTOMATED
+//            cout << "Random Final Pick: " << case_num << endl;
+#endif
+            
+        }
+        //We should have a number, so check that it's a valid one
+        if(case_num>0 && case_num <= _num_cases){
+            //The number itself is correct, so check if the case is already open
+            if(!_game_cases.is_opened(case_num-1)){
+                //Not opened, so we're good to go
+                valid_input = true;
+            }
+        }
+        //If valid_input is still false, get another number!
+    }
+//    double case_amount = _game_cases.open_case(case_num-1);
+//    if(show()){
+//        cout << "Opening case #" << case_num << " ($" << case_amount << ")" << endl;
+//    }
+    return case_num;
+}
+
+
+int dealornodeal::_get_user_input(const char* prompt_str){
+    //https://stackoverflow.com/questions/10828937/how-to-make-cin-take-only-numbers
+    //https://stackoverflow.com/questions/19223360/implicit-instantiation-of-undefined-template-stdbasic-stringchar-stdchar
+    string line;
+    int input;
+    cout << prompt_str;
+    while (getline(cin, line))
+    {
+        //Make sure the entire cin can be converted into an int. If not, keep asking.
+        stringstream ss(line);
+        if (ss >> input)
+        {
+            if (ss.eof())
+            {   // Success
+                break;
+            }
+        }
+        cout << "Error, please try again!\n" << prompt_str;
+    }
+    return input;    
+}
+
 #if 0
 
 //Two constructors, one for ints and one for string

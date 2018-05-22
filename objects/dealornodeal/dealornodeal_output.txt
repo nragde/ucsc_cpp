@@ -1,0 +1,314 @@
+In dealornodeal constructor! 
+Unopened Suitcases: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $100.00, $200.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $50000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Please pick a case: 15
+Saved case #15
+Unopened Suitcases: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $100.00, $200.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $50000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick 8 Cases:
+Pick a case to open: 1
+Opening case #1 ($200000.00)
+Unopened Suitcases: {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $100.00, $200.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $50000.00, $75000.00, $100000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 2
+Opening case #2 ($100.00)
+Unopened Suitcases: {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $50000.00, $75000.00, $100000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 3
+Opening case #3 ($50000.00)
+Unopened Suitcases: {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $75000.00, $100000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 5
+Opening case #5 ($75000.00)
+Unopened Suitcases: {4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $100000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 4
+Opening case #4 ($25000.00)
+Unopened Suitcases: {6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $100000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 8
+Opening case #8 ($300.00)
+Unopened Suitcases: {6, 7, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $100000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 9
+Opening case #9 ($100000.00)
+Unopened Suitcases: {6, 7, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 0
+Pick a case to open: 0
+Pick a case to open: 0
+Pick a case to open: 6
+Opening case #6 ($1000.00)
+Unopened Suitcases: {7, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $400.00, $500.00, $750.00, $5000.00, $10000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Banker's deal: $164834.22
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {7, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $400.00, $500.00, $750.00, $5000.00, $10000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick 7 Cases:
+Pick a case to open: 7
+Opening case #7 ($400.00)
+Unopened Suitcases: {10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $500.00, $750.00, $5000.00, $10000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 10
+Opening case #10 ($5000.00)
+Unopened Suitcases: {11, 12, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $200.00, $500.00, $750.00, $10000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 12
+Opening case #12 ($5.00)
+Unopened Suitcases: {11, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $10.00, $25.00, $50.00, $75.00, $200.00, $500.00, $750.00, $10000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 13
+Opening case #13 ($500.00)
+Unopened Suitcases: {11, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $10.00, $25.00, $50.00, $75.00, $200.00, $750.00, $10000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 14
+Opening case #14 ($750.00)
+Unopened Suitcases: {11, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $10.00, $25.00, $50.00, $75.00, $200.00, $10000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 11
+Opening case #11 ($300000.00)
+Unopened Suitcases: {16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $10.00, $25.00, $50.00, $75.00, $200.00, $10000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick a case to open: 16
+Opening case #16 ($400000.00)
+Unopened Suitcases: {17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $10.00, $25.00, $50.00, $75.00, $200.00, $10000.00, $500000.00, $750000.00, $1000000.00}
+Banker's deal: $205487.36
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $10.00, $25.00, $50.00, $75.00, $200.00, $10000.00, $500000.00, $750000.00, $1000000.00}
+Pick 5 Cases:
+Pick a case to open: 17
+Opening case #17 ($500000.00)
+Unopened Suitcases: {18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $10.00, $25.00, $50.00, $75.00, $200.00, $10000.00, $750000.00, $1000000.00}
+Pick a case to open: 19
+Opening case #19 ($10.00)
+Unopened Suitcases: {18, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $25.00, $50.00, $75.00, $200.00, $10000.00, $750000.00, $1000000.00}
+Pick a case to open: 21
+Opening case #21 ($50.00)
+Unopened Suitcases: {18, 20, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $25.00, $75.00, $200.00, $10000.00, $750000.00, $1000000.00}
+Pick a case to open: 23
+Opening case #23 ($25.00)
+Unopened Suitcases: {18, 20, 22, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $75.00, $200.00, $10000.00, $750000.00, $1000000.00}
+Pick a case to open: 25
+Opening case #25 ($75.00)
+Unopened Suitcases: {18, 20, 22, 24, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $200.00, $10000.00, $750000.00, $1000000.00}
+Banker's deal: $293366.84
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {18, 20, 22, 24, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $200.00, $10000.00, $750000.00, $1000000.00}
+Pick 4 Cases:
+Pick a case to open: 18
+Opening case #18 ($10000.00)
+Unopened Suitcases: {20, 22, 24, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $200.00, $750000.00, $1000000.00}
+Pick a case to open: 20
+Opening case #20 ($1000000.00)
+Unopened Suitcases: {22, 24, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $200.00, $750000.00, }
+Pick a case to open: 22
+Opening case #22 ($0.01)
+Unopened Suitcases: {24, 26}
+Potential Winnings on the Board: {$1.00, $200.00, $750000.00, }
+Pick a case to open: 24
+Opening case #24 ($750000.00)
+Unopened Suitcases: {26}
+Potential Winnings on the Board: {$1.00, $200.00, }
+Banker's deal: $100.50
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {26}
+Potential Winnings on the Board: {$1.00, $200.00, }
+Pick 0 Cases:
+Banker's deal: $100.50
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Banker's deal: $100.50
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {26}
+Potential Winnings on the Board: {$1.00, $200.00, }
+Your saved case: 15
+Pick the case you want to take as winnings: 15
+You opened case #15 to win $200.00
+----------------------------------------------------------------------------
+In dealornodeal destructor! 
+In dealornodeal constructor! 
+Unopened Suitcases: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $100.00, $200.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $50000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Saved case #3
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $100.00, $200.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $50000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Pick 6 Cases:
+Opening case #20 ($200.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $10.00, $25.00, $50.00, $75.00, $100.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $50000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Opening case #12 ($10.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $25.00, $50.00, $75.00, $100.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $50000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Opening case #23 ($50000.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $25.00, $50.00, $75.00, $100.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $750000.00, $1000000.00}
+Opening case #15 ($750000.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 16, 17, 18, 19, 21, 22, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $25.00, $50.00, $75.00, $100.00, $300.00, $400.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #17 ($400.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 16, 18, 19, 21, 22, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $25.00, $50.00, $75.00, $100.00, $300.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #8 ($300.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 9, 10, 11, 13, 14, 16, 18, 19, 21, 22, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $25.00, $50.00, $75.00, $100.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Banker's deal: $130875.30
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 9, 10, 11, 13, 14, 16, 18, 19, 21, 22, 24, 25, 26}
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $25.00, $50.00, $75.00, $100.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $75000.00, $100000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Pick 5 Cases:
+Opening case #26 ($100000.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 9, 10, 11, 13, 14, 16, 18, 19, 21, 22, 24, 25, }
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $25.00, $50.00, $75.00, $100.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $25000.00, $75000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #22 ($25000.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 9, 10, 11, 13, 14, 16, 18, 19, 21, 24, 25, }
+Potential Winnings on the Board: {$0.01, $1.00, $5.00, $25.00, $50.00, $75.00, $100.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $75000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #25 ($1.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 9, 10, 11, 13, 14, 16, 18, 19, 21, 24, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $50.00, $75.00, $100.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $75000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #14 ($75000.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 9, 10, 11, 13, 16, 18, 19, 21, 24, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $50.00, $75.00, $100.00, $500.00, $750.00, $1000.00, $5000.00, $10000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #24 ($10000.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 9, 10, 11, 13, 16, 18, 19, 21, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $50.00, $75.00, $100.00, $500.00, $750.00, $1000.00, $5000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Banker's deal: $160500.33
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 9, 10, 11, 13, 16, 18, 19, 21, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $50.00, $75.00, $100.00, $500.00, $750.00, $1000.00, $5000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Pick 4 Cases:
+Opening case #9 ($1000.00)
+Unopened Suitcases: {1, 2, 4, 5, 6, 7, 10, 11, 13, 16, 18, 19, 21, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $50.00, $75.00, $100.00, $500.00, $750.00, $5000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #5 ($50.00)
+Unopened Suitcases: {1, 2, 4, 6, 7, 10, 11, 13, 16, 18, 19, 21, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $75.00, $100.00, $500.00, $750.00, $5000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #7 ($100.00)
+Unopened Suitcases: {1, 2, 4, 6, 10, 11, 13, 16, 18, 19, 21, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $75.00, $500.00, $750.00, $5000.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #18 ($5000.00)
+Unopened Suitcases: {1, 2, 4, 6, 10, 11, 13, 16, 19, 21, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $75.00, $500.00, $750.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Banker's deal: $218305.00
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {1, 2, 4, 6, 10, 11, 13, 16, 19, 21, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $75.00, $500.00, $750.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Pick 3 Cases:
+Opening case #10 ($75.00)
+Unopened Suitcases: {1, 2, 4, 6, 11, 13, 16, 19, 21, }
+Potential Winnings on the Board: {$0.01, $5.00, $25.00, $500.00, $750.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #16 ($5.00)
+Unopened Suitcases: {1, 2, 4, 6, 11, 13, 19, 21, }
+Potential Winnings on the Board: {$0.01, $25.00, $500.00, $750.00, $200000.00, $300000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #21 ($300000.00)
+Unopened Suitcases: {1, 2, 4, 6, 11, 13, 19, }
+Potential Winnings on the Board: {$0.01, $25.00, $500.00, $750.00, $200000.00, $400000.00, $500000.00, $1000000.00}
+Banker's deal: $262659.38
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {1, 2, 4, 6, 11, 13, 19, }
+Potential Winnings on the Board: {$0.01, $25.00, $500.00, $750.00, $200000.00, $400000.00, $500000.00, $1000000.00}
+Pick 2 Cases:
+Opening case #1 ($25.00)
+Unopened Suitcases: {2, 4, 6, 11, 13, 19, }
+Potential Winnings on the Board: {$0.01, $500.00, $750.00, $200000.00, $400000.00, $500000.00, $1000000.00}
+Opening case #4 ($1000000.00)
+Unopened Suitcases: {2, 6, 11, 13, 19, }
+Potential Winnings on the Board: {$0.01, $500.00, $750.00, $200000.00, $400000.00, $500000.00, }
+Banker's deal: $183541.67
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {2, 6, 11, 13, 19, }
+Potential Winnings on the Board: {$0.01, $500.00, $750.00, $200000.00, $400000.00, $500000.00, }
+Pick 2 Cases:
+Opening case #19 ($0.01)
+Unopened Suitcases: {2, 6, 11, 13, }
+Potential Winnings on the Board: {$500.00, $750.00, $200000.00, $400000.00, $500000.00, }
+Opening case #13 ($400000.00)
+Unopened Suitcases: {2, 6, 11, }
+Potential Winnings on the Board: {$500.00, $750.00, $200000.00, $500000.00, }
+Banker's deal: $175312.50
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {2, 6, 11, }
+Potential Winnings on the Board: {$500.00, $750.00, $200000.00, $500000.00, }
+Pick 1 Cases:
+Opening case #2 ($750.00)
+Unopened Suitcases: {6, 11, }
+Potential Winnings on the Board: {$500.00, $200000.00, $500000.00, }
+Banker's deal: $233500.00
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {6, 11, }
+Potential Winnings on the Board: {$500.00, $200000.00, $500000.00, }
+Pick 1 Cases:
+Opening case #11 ($200000.00)
+Unopened Suitcases: {6, }
+Potential Winnings on the Board: {$500.00, $500000.00, }
+Banker's deal: $250250.00
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {6, }
+Potential Winnings on the Board: {$500.00, $500000.00, }
+Pick 0 Cases:
+Banker's deal: $250250.00
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Banker's deal: $250250.00
+Deal... or No Deal?
+We're playing to the end... NO DEAL!
+Unopened Suitcases: {6, }
+Potential Winnings on the Board: {$500.00, $500000.00, }
+Your saved case: 3
+You opened case #3 to win $500.00
+----------------------------------------------------------------------------
+In dealornodeal destructor! 
+Play Deal or No Deal until the winnings are $0.01
+Game #1, Won: $1000.00
+Game #2, Won: $750.00
+Game #3, Won: $5.00
+Game #4, Won: $750.00
+Game #5, Won: $300.00
+Game #6, Won: $300.00
+Game #7, Won: $750000.00
+Game #8, Won: $5.00
+Game #9, Won: $50.00
+Game #10, Won: $25000.00
+Game #11, Won: $200.00
+Game #12, Won: $300000.00
+Game #13, Won: $100.00
+Game #14, Won: $750000.00
+Game #15, Won: $0.01
+It took 15 games to win $0.01!
+----------------------------------------------------------------------------
+Play Deal or No Deal until the winnings are $1000000.00
+Game #1, Won: $50.00
+Game #2, Won: $5000.00
+Game #3, Won: $1.00
+Game #4, Won: $75.00
+Game #5, Won: $500.00
+Game #6, Won: $25.00
+Game #7, Won: $100000.00
+Game #8, Won: $500.00
+Game #9, Won: $5000.00
+Game #10, Won: $1000000.00
+It took 10 games to win $1000000.00!
+----------------------------------------------------------------------------
