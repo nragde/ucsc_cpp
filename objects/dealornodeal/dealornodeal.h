@@ -25,7 +25,6 @@ public:
     }
     return(lower_bound + rand() % upper_bound);
   }
-
 private:
   /* nobody can copy random or equal Random */
   Random(const Random& x);// = delete ;
@@ -61,31 +60,30 @@ private:
 
 //Crude linked list
 class list_of_suitcases{
-public:
-    list_of_suitcases(double* case_values_list, unsigned int num_cases, unsigned int num_swaps = 1000);
-    ~list_of_suitcases();
-    //int get_num_cases(){return _num_cases;}
-    double get_banker_deal();
-    double open_case(int case_num);
-    void set_first_picked(int case_num);
-    bool is_opened(int case_num);
-    void get_case(int case_num);
-    operator bool() const;
-    friend ostream& operator<<(ostream& o, const list_of_suitcases& case_list);
-    static Random randomizer;
-private:
-    suitcase** _case_list; //A pointer to an array of suitcase objects
-    double* _remaining_vals;
-    unsigned int _index;
-    unsigned int _maxsize;
-    //int _num_cases;
-    void _update_remaining_vals(suitcase* case_ptr);
-    void _shuffle_cases(int number_of_swaps = 1000);
-    void _swap(int a, int b);
-    void _release();
-    list_of_suitcases(const list_of_suitcases& temp);// = delete;
-    list_of_suitcases& operator=(const list_of_suitcases& temp);// = delete;
-    //void _copy();
+    public:
+        list_of_suitcases(double* case_values_list, unsigned int num_cases, unsigned int num_swaps = 1000);
+        ~list_of_suitcases();
+        double get_banker_deal();
+        double open_case(int case_num);
+        void set_first_picked(int case_num);
+        bool is_opened(int case_num);
+        void get_case(int case_num);
+        operator bool() const;
+        friend ostream& operator<<(ostream& o, const list_of_suitcases& case_list);
+        //Make a public static Random so that we can seed it ONCE per run of main()
+        static Random randomizer;
+    private:
+        suitcase** _case_list; //A pointer to an array of suitcase objects
+        double* _remaining_vals;
+        unsigned int _index;
+        unsigned int _maxsize;
+        //int _num_cases;
+        void _update_remaining_vals(suitcase* case_ptr);
+        void _shuffle_cases(int number_of_swaps = 1000);
+        void _swap(int a, int b);
+        void _release();
+        list_of_suitcases(const list_of_suitcases& temp);// = delete;
+        list_of_suitcases& operator=(const list_of_suitcases& temp);// = delete;
 };
 
 
@@ -104,14 +102,13 @@ class dealornodeal{
         static void makeInteractiveOn(){_interactive = true; _show = true;} //If interactive is on, then show also HAS to be on
         static void makeInteractiveOff(){_interactive = false;}
         static bool interactive(){return _interactive;}
+        //Make a public static Random so that we can seed it ONCE per run of main()
         static Random randomizer;
     private:
         //Show the debug print statements or not, off by default
         static bool _show;
         //Play the game interactively or not, off by default
         static bool _interactive;
-        //Randomizer
-        
         //No copy constructor or equal operator
         dealornodeal(const dealornodeal& dod);// = delete;
         dealornodeal& operator=(const dealornodeal& dod);// = delete;
@@ -130,7 +127,6 @@ class dealornodeal{
         int _get_user_input(const char* prompt_str);
         void _print_arr(unsigned int arr[], int len);
         int _sum_arr(unsigned int arr[], int len);
-        
 };
 
 

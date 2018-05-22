@@ -94,26 +94,30 @@ list_of_suitcases::~list_of_suitcases(){
 }
 ostream& operator<<(ostream& o, const list_of_suitcases& case_list){
     o << "Unopened Suitcases: {";
+    bool is_first = true;
     for(int i = 0; i < case_list._maxsize; i++){
         // Check if current case is open
         suitcase* tmp = case_list._case_list[i];
         if(not tmp->is_opened() and not case_list._case_list[i]->is_first_picked()){
-            o << tmp->get_number();
-            if(i < case_list._maxsize-1){
+            if(!is_first){
                 o << ", ";
             }
+            o << tmp->get_number();
+            is_first = false;
         }
     }
     o << "}" << endl;
+    is_first = true;
     o << "Potential Winnings on the Board: {";
     for(int i = 0; i < case_list._maxsize; i++){
         //Print all of the available values on the board
         double cur_val = case_list._remaining_vals[i];
         if(cur_val != -1){
-            o << "$" << fixed << setprecision(2) << cur_val;
-            if(i < case_list._maxsize-1){
+            if(!is_first){
                 o << ", ";
             }
+            o << "$" << fixed << setprecision(2) << cur_val;
+            is_first = false;
         }
     }
     o << "}" << endl;
@@ -163,7 +167,6 @@ double list_of_suitcases::open_case(int case_num){
     s->open_case();
     _update_remaining_vals(s);
     return s->get_value();
-    //cout << *s;
 }
 
 void list_of_suitcases::set_first_picked(int case_num){
@@ -225,7 +228,6 @@ void list_of_suitcases::get_case(int case_num){
     cout << *a;    
 }
 
-//double default_case_vals[] = {0.01, 1.0, 5.0, 10.0, 25.0, 50.0, 75.0, 100.0, 200.0, 300.0, 400.0, 500.0 750.0, 1000.0, 5000.0, 10000.0, 25000.0, 50000.0, 75000.0, 100000.0, 200000.0, 300000.0, 400000.0, 500000.0, 750000.0, 1000000.0};
 /*--------------------------------------------------------
 DEAL OR NO DEAL
  * ----------------------------------------------------------*/
@@ -242,10 +244,6 @@ dealornodeal::dealornodeal(const unsigned int num_cases, double* case_values_lis
     assert(_rounds > 0);
     //Determine cases per round
     _determine_cases_per_round();
-//            list_of_suitcases _game_cases;
-//        const unsigned int _num_cases;
-//        unsigned int _rounds;
-//        unsigned int* _cases_per_round;
 }
 
 dealornodeal::~dealornodeal(){
@@ -269,7 +267,7 @@ double dealornodeal::play(){
     _game_cases.get_case(_saved_case_num+1);
 #endif
     //Now, play each round. There should be just two cases left
-    for(int round = 0; round < _rounds; round++){
+    for(int round = 0; round < _rounds-1; round++){
         //Print out state at this point
         if(show()){
             cout << _game_cases;
@@ -277,7 +275,7 @@ double dealornodeal::play(){
         //Figure out how many cases need to be opened this round
         int cases_in_round = _cases_per_round[round];
         if(show()){
-            cout << "Pick " << cases_in_round << " Cases:" << endl;
+            cout << "Pick " << cases_in_round << " Case(s):" << endl;
         }
         //Open the proper number of cases for this round
         for(int cur_case = 0; cur_case < cases_in_round; cur_case++){
@@ -294,16 +292,10 @@ double dealornodeal::play(){
         if(show()){
             cout << "Banker's deal: $" << fixed << setprecision(2) << bankers_deal << endl;
             cout << "Deal... or No Deal?\nWe're playing to the end... NO DEAL!" << endl;
+            cout << "----------" << endl;
         }
     }
-    //Final banker's deal
-    //Get the banker's deal
-    double bankers_deal = _game_cases.get_banker_deal();
-    //Ask deal or no deal (always no deal, so just note it)
-    if(show()){
-        cout << "Banker's deal: $" << fixed << setprecision(2) << bankers_deal << endl;
-            cout << "Deal... or No Deal?\nWe're playing to the end... NO DEAL!" << endl;
-    }
+    //Final banker's deal completed in loop above
     //Pick which one you'll keep (your case or the other case)
     int winning_case = _pick_final_case();
     //This is the winnings!
@@ -322,57 +314,15 @@ void dealornodeal::_determine_cases_per_round(){
     assert(_rounds > 0);
     //The last round HAS to be 1 case (so that it's that case and the chosen case)
     
-//    6	5	4	3	2	1	1	1	1
-#ifdef DEBUG_AUTOMATED //|| DEBUG_INTERACTIVE
+#ifdef DEBUG_AUTOMATED
+    //    6	5	4	3	2	1	1	1	1
+    //Temporary, to get games going
     _rounds = 9;
     _cases_per_round = new unsigned int[_rounds];
     int my_rounds[] = {6, 5, 4, 3, 2, 1, 1, 1, 1};
     for(int i = 0; i < _rounds; i++){
         
         _cases_per_round[i] = my_rounds[i];
-    }
-#elif OTHER_THING   
-    //Last round has to be 1 case (to pick between the last one and the chosen one)
-    int cases_we_want = _num_cases - 1; //Adjust for the first picked case
-    //Sum up the remaining rounds from 1
-    int rounds_case_sum = 0;
-    int cases_per_round = 1;
-    cases_we_want -= 1; //Adjust for the last round which is a 1
-    int rounds_before_over = -1;
-    for(int rr = 0; rr < _rounds-1; rr++){
-        cases_per_round++; //@ start, increase for the current round (2) for the second one
-        rounds_case_sum += cases_per_round;
-        //If we've crossed the threshold, we need to adjust down
-        if(rounds_case_sum > cases_we_want){
-            rounds_before_over = rr;
-            break;
-        }
-    }
-    // If we're higher than cases_we_want, subtract off the top into end rounds of 1
-    if(rounds_case_sum > cases_we_want){
-        //We know how many rounds we went before we went over (rounds_before_over)
-        //We know how how many cases were added in that round (cases_per_round)
-        //We have more rounds left and we need to add rounds of 1 until we
-    }
-    // If we're lower than cases_we_want, add to the top of the early rounds
-    else if (rounds_case_sum < cases_we_want){
-        
-    }
-    else{
-        assert(false && "exactly equal, what is this?");
-    }
-    //Per round: FLOOR((Total cases / remaining rounds) * 2)
-    _cases_per_round = new unsigned int[_rounds];
-    int round_ind = 0;
-    unsigned int remaining_cases = _num_cases;
-    for(int i = _rounds; i > 0; i--){
-        //The int will chop off the decimals i.e. flooring it
-        int current_cases_per_round(remaining_cases/i*2);
-        remaining_cases -= current_cases_per_round;
-        _cases_per_round[round_ind] = current_cases_per_round;
-    }
-    if(show()){
-        //Print out the cases per round
     }
 #else
     //Last round has to be 1 case (to pick between the last one and the chosen one)
@@ -505,8 +455,8 @@ int dealornodeal::_pick_final_case(){
 //    Random randomizer; //Do this here, or else seeding will mess up
     //The pick is for which one is the winnings
     if(show()){
-        cout << _game_cases;
         cout << "Your saved case: " << _saved_case_num << endl;
+        cout << _game_cases;
     }
     
     while(!valid_input){
@@ -516,9 +466,8 @@ int dealornodeal::_pick_final_case(){
         else{
             case_num = randomizer.get_random_number(0, _num_cases);
 #ifdef DEBUG_AUTOMATED
-//            cout << "Random Final Pick: " << case_num << endl;
+            cout << "Random Final Pick: " << case_num << endl;
 #endif
-            
         }
         //We should have a number, so check that it's a valid one
         if(case_num>0 && case_num <= _num_cases){
@@ -530,14 +479,11 @@ int dealornodeal::_pick_final_case(){
         }
         //If valid_input is still false, get another number!
     }
-//    double case_amount = _game_cases.open_case(case_num-1);
-//    if(show()){
-//        cout << "Opening case #" << case_num << " ($" << case_amount << ")" << endl;
-//    }
+    
     return case_num;
 }
 
-
+//This is a helpfer function to get user input. Taken from a stackoverflow answer, cited below.
 int dealornodeal::_get_user_input(const char* prompt_str){
     //https://stackoverflow.com/questions/10828937/how-to-make-cin-take-only-numbers
     //https://stackoverflow.com/questions/19223360/implicit-instantiation-of-undefined-template-stdbasic-stringchar-stdchar
@@ -559,380 +505,6 @@ int dealornodeal::_get_user_input(const char* prompt_str){
     }
     return input;    
 }
-
-#if 0
-
-//Two constructors, one for ints and one for string
-//Constructor for the ints input case
-intmatrix2::intmatrix2(int row, int col, int val):
-_rows(row), _cols(col), _arr(nullptr), _is_empty(true){
-#ifdef DEBUG_PRINT_STATES
-cout << "In the (int) constructor!" << endl;
-#endif
-//By default, we're initialized into an empty matrix
-//Now determine if we a legitimate matrix definition
-//Reasons for an Empty Matrix:
-//If there are no inputs, row & col will be (defaulted to) 0
-//If there's an invalid number for row or col (0 or negative)
-if(not (row < 1 || col < 1)){
-    //We've got a proper number of rows and cols, so we can fill it!
-    _is_empty = false;
-    //Keep track of the rows and cols, internally
-    _rows = row;
-    _cols = col;
-    //Fill a matrix with the proper dimensions with the proper "val"
-    int num_elements = row * col;
-    _arr = new int[num_elements];
-    for(int i = 0; i < num_elements; i++){
-        _arr[i] = val;
-    }
-}
-
-}
-
-//Constructor for the string input case
-intmatrix2::intmatrix2(const char* arr_str):
-_rows(0), _cols(0), _arr(nullptr), _is_empty(true){
-#ifdef DEBUG_PRINT_STATES
-cout << "In the (char*) constructor!" << endl;
-#endif
-bool is_valid = _insert_str_vals(arr_str);
-if(is_valid){
-    _is_empty = false;
-}
-}
-
-//Destructor
-intmatrix2::~intmatrix2(){
-#ifdef DEBUG_PRINT_STATES
-cout << "In the destructor!" << endl;
-#endif
-//Run the helper function that'll free allocated heap memory
-_release();    
-}
-
-//Copy constructor
-intmatrix2::intmatrix2(const intmatrix2& mat){
-#ifdef DEBUG_PRINT_STATES
-cout << "In the copy constructor!" << endl;
-#endif
-_copy(mat);
-}
-
-//Equal operator
-intmatrix2& intmatrix2::operator=(const intmatrix2& mat){
-#ifdef DEBUG_PRINT_STATES
-cout << "In the equal operator!" << endl;
-#endif
-//Guard against equalling yourself!
-if(this != &mat){
-    //Release the currently allocated heap stuff
-    _release();
-    //Now, just a deep copy is needed
-    _copy(mat);
-}
-//"this" is a pointer. To return an object (ref), need to de-reference 
-// the pointer (aka the "this" object)
-return *this;
-}
-
-//Print operator (<<)
-ostream& operator<<(ostream& o, const intmatrix2& mat){
-#ifdef DEBUG_PRINT_STATES
-cout << "In the print (<<) operator!" << endl;
-#endif
-//cout << "-------- " << str << " -----------" << endl;
-if(mat._is_empty){
-    //print out empty matrix
-    o << "Empty matrix" << endl;
-}
-else{
-    for(int r = 0; r < mat._rows; r++){
-        for(int c = 0; c < mat._cols; c++){
-            //Print out the 1D array as a 2D array
-            o << setw(5) << mat._arr[r*mat._cols + c];
-        }
-        o << endl;
-    }
-}
-//"o" is the referenced object, so we can directly return it (unlike "this")!
-return o;
-}
-
-void intmatrix2::_release(){
-//The only heap allocated data is our array of values
-delete [] _arr;
-}
-
-//Copy constructor: just copys the values from the passed in matrix reference
-void intmatrix2::_copy(const intmatrix2& orig_mat){
-#ifdef DEBUG_PRINT_STATES
-cout << "In _copy!" << endl;
-#endif
-_rows = orig_mat._rows;
-_cols = orig_mat._cols;
-_is_empty = orig_mat._is_empty;
-//Copy the existing arr into a new one
-_arr = new int[_rows*_cols];
-for(int i = 0; i < _rows*_cols; i++){
-    _arr[i] = orig_mat._arr[i];
-}
-}
-
-bool intmatrix2::isEmpty() const{
-return _is_empty;
-}
-
-bool intmatrix2::isEqual(const intmatrix2 that) const{
-//Dimensions have to be the same
-if ((this->_rows == that._rows) && (this->_cols == that._cols)){
-    //Now check element by element. The values should be same for the same
-    //(row,col) pairs. If even one is off, return false.
-    for(int r = 0; r < this->_rows; r++){
-        for(int c = 0; c < this->_cols; c++){
-            if(this->_arr[r*(this->_cols)+c] != that._arr[r*that._cols+c]){
-                return false;
-            }
-        }
-    }
-}
-else{
-    //If dimensions don't match, they necessarily cannot be equal
-    return false;
-}
-//If we've made it this far, the checks have passed and we are equal
-return true;
-}
-
-intmatrix2 intmatrix2::add(const intmatrix2 that) const{
-//What happens if it's just a single number?
-//Dimensions have to be the same
-if ((this->_rows == that._rows) && (this->_cols == that._cols)){
-    intmatrix2 sum_arr(this->_rows, this->_cols);
-    for(int r = 0; r < this->_rows; r++){
-        for(int c = 0; c < this->_cols; c++){
-            int sum_val = this->_arr[this->_rcind(r,c)] + that._arr[that._rcind(r,c)];
-            //sum_arr.set_arr_val(r,c, sum_val);
-            sum_arr._arr[sum_arr._rcind(r,c)] = sum_val;
-        }
-    }
-    return sum_arr;
-}
-//If the dimensions do NOT match, we need to return an empty matrix
-intmatrix2 sum_arr;    
-return sum_arr;
-}
-
-intmatrix2 intmatrix2::mult(const intmatrix2 that) const{
-//Scalars are an edge case
-//this matrix is a single, scalar value
-if(this->_rows == 1 && this->_cols ==1){
-    //Copy the inputted matrix, and apply the scalar to that
-    intmatrix2 prod_arr(that);
-    int scalar = this->_arr[0];
-    for(int r = 0; r < prod_arr._rows; r++){
-        for(int c = 0; c < prod_arr._cols; c++){
-            prod_arr._arr[prod_arr._rcind(r,c)] *= scalar;
-#ifdef DEBUG_1
-            cout << prod_arr << endl;
-#endif 
-        }
-    }
-    return prod_arr;
-}
-//the inputted matrix is a single, scalar value
-else if(that._rows == 1 && that._cols ==1){
-    //Copy the current matrix, and apply the scalar to that
-    intmatrix2 prod_arr(*this);
-    int scalar = that._arr[0];
-    for(int r = 0; r < prod_arr._rows; r++){
-        for(int c = 0; c < prod_arr._cols; c++){
-            prod_arr._arr[prod_arr._rcind(r,c)] *= scalar;
-#ifdef DEBUG_1
-            cout << prod_arr << endl;
-#endif 
-        }
-    }
-    return prod_arr;
-}
-
-//Do the dimension check
-if(this->_cols == that._rows){
-    //The dimensions match! Now do the math...
-    //The _rows and _cols are set by the _rows of this and the _cols of that
-    //Initialize to 0 to start with a clean matrix
-    intmatrix2 prod_arr(this->_rows, that._cols, 0);
-    //Multiply the corresponding row of THIS by the col of THAT
-    //The first row of prod_arr requires the first row of THIS, and so on
-    for(int r = 0; r < this->_rows; r++){
-        //Get the row of THIS
-        int this_row[this->_cols];
-        for(int tc = 0; tc < _cols; tc++){
-            this_row[tc] = this->_arr[this->_rcind(r,tc)];
-        }
-        //Now do the math for each col of THAT, by going down rows
-        for(int cc = 0; cc < that._cols; cc++){
-            int that_col[that._rows];
-            for(int rr = 0; rr < that._rows; rr++){
-                that_col[rr] = that._arr[that._rcind(rr,cc)];
-            }
-            //At this point, I have the current row and the current col
-            int cur_num = 0;
-            for(int ind = 0; ind < that._rows; ind++){
-                int this_val = this_row[ind];
-                int that_val = that_col[ind];
-                int prod = this_val * that_val;
-                cur_num += prod;
-            }
-            prod_arr._arr[prod_arr._rcind(r,cc)] = cur_num;
-        }
-    }
-    return prod_arr;
-}
-//The dimensions do NOT allow for valid multiplication, so empty arr
-intmatrix2 prod_arr;
-return prod_arr;
-}
-
-//Helper function to convert an (r,c) pair to it's linearized value
-//NOTE: must be called for the specific object when used in a function, or else
-// "this"'s _rows and _cols will be used, resulting in potentially bad stuff
-int intmatrix2::_rcind(int r, int c) const{
-return r*_cols + c;
-}
-
-//Helper function to convert a numeric char '0'-'9' to it's int value of 0-9
-int intmatrix2::_char_to_int(const char* int_str){
-return int(*int_str - '0');
-}
-
-//A ridiculous function that both parses a matrix string to determine if it's
-//valid and also sets up the array if it is for the current object
-bool intmatrix2::_insert_str_vals(const char* arr_str){
-const char* init_arr_str = arr_str; //shallow copy of beginning of char* arr
-int num_rows = 0;
-bool first_row = true;
-int num_cols = 0;
-int cur_col_num = 0;
-bool within_number = false;
-
-while(*arr_str){
-
-    //Check what the current character is
-    //Is it a space
-    if(*arr_str == ' '){
-        if(within_number){
-            within_number = false;
-            cur_col_num++;
-            //cur_col_num = 0;
-        }
-    }
-    //Is it a |
-    else if (*arr_str == '|'){
-        //The first row defines how many numbers are for "cols"
-        if(within_number){
-            within_number = false;
-            cur_col_num++;
-        }
-        if(first_row){
-            first_row = false;
-            num_cols = cur_col_num;
-        }
-        //Every row must have the same number of columns
-        if(!(num_cols == cur_col_num)){
-            return false;
-        }
-        cur_col_num = 0;
-        num_rows++;
-    }
-    //Is it a number?
-    else if (*arr_str >= '0' && *arr_str <= '9'){
-        within_number = true;
-
-    }
-    //If it's anything else, not valid
-    else{
-        return false;
-    }
-    arr_str++;
-}
-//Tweak the column count if the last character is a number
-if(within_number){
-    within_number = false;
-    cur_col_num++;
-}
-//If it's a single row of numbers, make sure we mark that
-if(num_rows == 0 && cur_col_num != 0){
-    //num_rows++;
-    num_cols = cur_col_num;
-}
-//Need to verify that the last row is also valid
-if(!(num_cols == cur_col_num)){
-        return false;
-}
-else{
-    num_rows++;
-}
-//--------------------------------------------------
-//At this point, we know the number of cols and rows
-//If it's an empty string, the above may pass through without failing
-if(num_rows == 0 || num_cols == 0){
-    return false;
-}
-//We will now loop through the string, again, and add values as appropriate
-int cur_num = 0;
-_arr = new int[num_rows*num_cols];
-_rows = num_rows;
-_cols = num_cols;
-int arr_ind = 0;
-arr_str = init_arr_str;
-while(*arr_str){
-    //Check what the current character is
-    //Is it a space
-    if(*arr_str == ' '){
-        //Space between numbers, so enter the current number into the next spot
-        if(within_number){
-            within_number = false;
-            _arr[arr_ind++] = cur_num;
-            cur_num = 0;
-        }
-    }
-    //Is it a |
-    else if (*arr_str == '|'){
-        //The first row defines how many numbers are for "cols"
-        if(within_number){
-            within_number = false;
-            _arr[arr_ind++] = cur_num;
-            cur_num = 0;
-        }
-    }
-    //Is it a number?
-    else if (*arr_str >= '0' && *arr_str <= '9'){
-        //Double digit number, so shift the current number left by one
-        if(within_number){
-            cur_num *= 10;
-        }
-        within_number = true;
-        cur_num += _char_to_int(arr_str);
-
-    }
-    //If it's anything else, not valid
-    else{
-        return false;
-    }
-    arr_str++;
-}
-//Tweak the column count if the last character is a number
-if(within_number){
-    within_number = false;
-    _arr[arr_ind++] = cur_num;
-    cur_num = 0;
-}
-
-return true;
-}
-
-#endif
 
 #if 0
 //OUTPUT GOES HERE:
