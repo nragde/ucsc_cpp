@@ -22,7 +22,7 @@ bool iset64::_show = false;
 /*--------------------------------------------------------
  * SUITCASE
 ----------------------------------------------------------*/
-iset64::iset64(int x[], int length):
+iset64::iset64(const int x[], int length):
     _arr(nullptr), _len(length){
     if(show()){
         cout << "In iset64 constructor!" << endl;
@@ -95,7 +95,7 @@ void iset64::_copy(const iset64& set){
         _arr[i] = set._arr[i];
     }
 }
-void iset64::_alloc(int x[], int len){
+void iset64::_alloc(const int x[], int len){
     _arr = new int[NUM_ELEMENTS];
     _zero_fill_arr();
     if(len > 0){
@@ -109,7 +109,7 @@ void iset64::_zero_fill_arr(){
     }
 }
 
-void iset64::_init_arr(int x[], int len){
+void iset64::_init_arr(const int x[], int len){
     for(int i = 0; i < len; ++i){
         int ind = x[i];
         //Make sure it's within 0-63
@@ -180,6 +180,34 @@ iset64& operator -=(iset64& a, int b){
         if(a._arr[b]){
             a._arr[b] = 0;
         }
+    }
+    return a;
+}
+
+iset64& operator *=(iset64& a, const iset64& b){
+    for(int i = 0; i < NUM_ELEMENTS; ++i){
+        if(a._arr[i] && b._arr[i]){
+            a._arr[i] = 1;
+        }
+        else{
+            a._arr[i] = 0;
+        }
+    }
+    return a;    
+}
+
+iset64& operator *=(iset64& a, int b){
+    if(b >= 0 && b <= NUM_ELEMENTS){
+        if(a._arr[b]){
+            a._zero_fill_arr();
+            a._arr[b] = 1;
+        }
+        else{
+            a._zero_fill_arr();
+        }
+    }
+    else{
+        a._zero_fill_arr();
     }
     return a;
 }
