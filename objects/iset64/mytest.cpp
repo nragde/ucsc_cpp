@@ -137,6 +137,37 @@ void math_ops(){
     cout << "-------------------------------------------------" << endl;
 }
 
+void crements_flip(){
+    cout << "------------------- [IN/DE]CREMENTS --------------------" << endl;
+    int x[] = {0, 1, 2, 62, 63};
+    int len = sizeof(x)/sizeof(int);
+    iset64 a(x, len);
+//    iset64 aa(a);
+    int xs[] = {1, 3, 10, 4};
+    int lens = sizeof(xs)/sizeof(int);
+    iset64 b(xs, lens);
+    cout << "A: " << a;
+    cout << "B: " << b;
+    iset64 aa = ++a;
+    cout << "++A: " << aa;
+    cout << "A: " << a;
+    iset64 aaa = a++;
+    cout << "A++: " << aaa;
+    cout << "A: " << a;
+    iset64 bb = --b;
+    cout << "-------" << endl;
+    cout << "B: " << b;
+    cout << "--B: " << bb;
+    iset64 bbb = b--;
+    cout << "B--: " << bbb;
+    cout << "B: " << b;
+    cout << "BBB: " << bbb;
+    cout << "B: " << b;
+    iset64 bbbb = ~bbb;
+    cout << "~BBB: " << bbbb;
+    
+}
+
 /*----------------------------------------------------------------
 test bed
 -----------------------------------------------------------------*/
@@ -146,6 +177,7 @@ void testbed() {
     unary_operators();
     equals_operators();
     math_ops();
+    crements_flip();
 }
 
 /*----------------------------------------------------------------

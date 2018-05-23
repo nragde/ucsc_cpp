@@ -298,22 +298,117 @@ bool operator==(const iset64& a, const iset64& b){
     return is_equal;
 }
 
-iset64& operator++(const iset64& set){
+//Pre-increment operator
+iset64& operator++(iset64& set){
+    //Add one to everything. Wrap a 63 to a 0;
+    bool wraparound = false;
+    for(int i = NUM_ELEMENTS-1; i >=0; --i){
+        //If the current int is part of the set, add one
+        if(set._arr[i]){
+            //Remove the current number
+            set._arr[i] = 0;
+            if(i != NUM_ELEMENTS-1){
+                //Add one to the number higher above
+                set._arr[i+1] = 1;
+            }
+            else{
+                //If we need to wrap around, do it at the end.
+                wraparound = true;
+            }
+        }
+    }
+    if(wraparound){
+        set._arr[0] = 1;
+    }
+    return set;
 }
-iset64 operator++(const iset64& set, int post){
+
+iset64 operator++(iset64& set, int post){
+    iset64 unincremented_set(set);
+//    ++set;
+    //Add one to everything. Wrap a 63 to a 0;
+    bool wraparound = false;
+    for(int i = NUM_ELEMENTS-1; i >=0; --i){
+        //If the current int is part of the set, add one
+        if(set._arr[i]){
+            //Remove the current number
+            set._arr[i] = 0;
+            if(i != NUM_ELEMENTS-1){
+                //Add one to the number higher above
+                set._arr[i+1] = 1;
+            }
+            else{
+                //If we need to wrap around, do it at the end.
+                wraparound = true;
+            }
+        }
+    }
+    if(wraparound){
+        set._arr[0] = 1;
+    }
+    return unincremented_set;
 }
-iset64& operator--(const iset64& set){
+
+iset64& operator--(iset64& set){
+    //Subtract one from everything. Wrap a 0 to a 63;
+    bool wraparound = false;
+    for(int i = 0; i < NUM_ELEMENTS; ++i){
+        //If the current int is part of the set, subtract one
+        if(set._arr[i]){
+            //Remove the current number
+            set._arr[i] = 0;
+            //Wrap the 0 around at the very end
+            if(i){
+                //Add one to the number higher above
+                set._arr[i-1] = 1;
+            }
+            else{
+                //If we need to wrap around, do it at the end.
+                wraparound = true;
+            }
+        }
+    }
+    if(wraparound){
+        set._arr[NUM_ELEMENTS-1] = 1;
+    }
+    return set;
 }
-iset64 operator--(const iset64& set, int post){
+
+iset64 operator--(iset64& set, int post){
+    iset64 undecremented_set(set);
+//    --set;
+    //Subtract one from everything. Wrap a 0 to a 63;
+    bool wraparound = false;
+    for(int i = 0; i < NUM_ELEMENTS; ++i){
+        //If the current int is part of the set, subtract one
+        if(set._arr[i]){
+            //Remove the current number
+            set._arr[i] = 0;
+            //Wrap the 0 around at the very end
+            if(i){
+                //Add one to the number higher above
+                set._arr[i-1] = 1;
+            }
+            else{
+                //If we need to wrap around, do it at the end.
+                wraparound = true;
+            }
+        }
+    }
+    if(wraparound){
+        set._arr[NUM_ELEMENTS-1] = 1;
+    }
+    return undecremented_set;
 }
-iset64 operator~(const iset64& set){
+
+iset64 operator~(iset64& set){
     iset64 out(set);
     for(int i = 0; i < NUM_ELEMENTS; ++i){
         if(out._arr[i]){
             out._arr[i] = 0;
         }
         else{
-            out._arr[i] = 0;
+            out._arr[i] = 1;
         }
     }
     return out;   
