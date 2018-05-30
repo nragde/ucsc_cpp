@@ -582,7 +582,7 @@ int main() {
 #ifdef _WIN32
   _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
-  iset64::set_display(true) ;
+  iset64::set_display(false) ;
   testbed();
   cout << "Must attach output of the program to get a grade\n" ;
   cout << "Must attach a doc that explains the data structure that was used to solve to get a grade\n" ;
