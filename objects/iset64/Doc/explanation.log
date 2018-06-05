@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  30 MAY 2018 09:52
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.5.23)  30 MAY 2018 10:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -26,37 +26,34 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 (./explanation.aux)
 \openout1 = `explanation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 16.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 16.
  [1
 
-{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./expl
-anation.aux) ) 
+] (./explanation.aux) ) 
 Here is how much of TeX's memory you used:
- 212 strings out of 492995
- 2336 string characters out of 6132704
- 56074 words of memory out of 5000000
- 3847 multiletter control sequences out of 15000+600000
- 5446 words of font info for 20 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 22i,4n,19p,608b,109s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmss12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmssbx10.pfb>
-Output written on explanation.pdf (1 page, 25050 bytes).
-PDF statistics:
- 16 PDF objects out of 1000 (max. 8388607)
- 10 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 225 strings out of 493005
+ 2676 string characters out of 6134596
+ 64634 words of memory out of 5000000
+ 4272 multiletter control sequences out of 15000+600000
+ 4609 words of font info for 24 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 22i,6n,19p,608b,187s stack positions out of 5000i,500n,10000p,200000b,80000s
 
+Output written on explanation.pdf (1 page).

@@ -15,16 +15,13 @@ public:
     iset64(const iset64& set);
     iset64& operator=(const iset64& set);
     friend ostream& operator<<(ostream& o, const iset64& set);
-//    //Operators
-//    friend iset64 operator+(const iset64& set);
-//    friend iset64 operator-(const iset64& set);
+    //Operators
     friend iset64& operator++(iset64& set);
     friend iset64 operator++(iset64& set, int post);
     friend iset64& operator--(iset64& set);
     friend iset64 operator--(iset64& set, int post);
     friend iset64 operator~(iset64& set);
     friend bool operator!(const iset64& set);
-//    friend iset64* operator&(const iset64& set);
     operator bool() const;
     //Binary operators
     friend iset64 operator+(const iset64& a, const iset64& b);

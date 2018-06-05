@@ -1,16 +1,31 @@
 \documentclass[12pt, letterpaper]{article}
-\renewcommand{\familydefault}{\sfdefault}
+
+%\renewcommand{\familydefault}{\sfdefault}
+%\usepackage{fontspec}
+%\setmainfont{Helvetica}
+%\setmonofont{Menlo}
 
 \title{iset64: A Set Class}
 \author{Nikhil Ragde \#12}
 \date{May 2018}
 
 \begin{document}
+
+\pagenumbering{gobble} %turn off page numbering
+%\begin{titlepage}
+\maketitle
+%\end{titlepage}
+\pagenumbering{arabic} %turn page numbering back on, starting at 1
 \section*{iset64: A Set Class}
 A brief description of the iset64 class.
 \setcounter{section}{1}
 \subsection{Data Structure}
-Many different data structures could be used for such a class. I chose to use a fixed-length, dynamically allocated array that stores an int. The indices correspond to the integers present in the set. In fact, using a bool array would've been even better. This would prevent any situation of a number appear twice due to an incorrectly implemented print algorithm. However, I have effectively used ints as bools in this class; I only check whether the number is 0 or not.
+Many different data structures could be used for such a class. I chose to use a fixed-length, dynamically allocated array that stores an \texttt{int}. The indices correspond to the integers present in the set.
+
+In fact, using a bool array would've been even better. This would prevent any situation of a number appear twice due to an incorrectly implemented print algorithm. However, I have effectively used ints as bools in this class; I only check whether the number is 0 or not.
+
 \subsection{Algorithms}
 The use of the fixed-length, dynamically allocated int array means that it is possible to have the "worst-case" performances be equal to the length of the array (i.e. 64 elements). Due to the way that operators behavior has been implemented, the loops that increment, decrement, invert, etc. are effectively executed in "constant time". This is true because the loops only have to pass through the array once, completely. In the case of incrementing or decrementing, there may be one more addition after this to handle the "rollover" case, but even that is bound by the length of the array.
+
+There are other things that make this great as well.
 \end{document}
