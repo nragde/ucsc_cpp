@@ -13,15 +13,14 @@ All includes here
 //#define DEBUG_INTERACTIVE
 //#define DEBUG_AUTOMATED 1
 //#define DEBUG_ROUNDS
+
 /*--------------------------------------------------------
- * SUITCASE
+class integer set (integers between 0 and 63)
 ----------------------------------------------------------*/
+
 int NUM_ELEMENTS = 64;
 bool iset64::_show = false;
 
-/*--------------------------------------------------------
- * SUITCASE
-----------------------------------------------------------*/
 iset64::iset64(const int x[], int length):
     _arr(nullptr), _len(length){
     if(show()){
