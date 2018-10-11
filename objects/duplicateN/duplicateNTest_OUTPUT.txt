@@ -1,0 +1,233 @@
+-------------------------------------
+DUPLICATES: {1}
+O(n^2)Time O(1)Space n = 3 CPU 3.7e-05 secs
+0   1   2   
+1   1   1   
+DUPLICATES: {1}
+O(n)Time O(n)Space  n = 3 CPU 4e-06 secs
+0   1   2   
+1   1   1   
+DUPLICATES: {1}
+O(n)Time O(1)Space n = 3 CPU 1.7e-05 secs
+0   1   2   
+1   1   1   
+-------------------------------------
+-------------------------------------
+DUPLICATES: {0}
+O(n^2)Time O(1)Space n = 4 CPU 3e-06 secs
+0   1   2   3   
+1   0   0   0   
+DUPLICATES: {0}
+O(n)Time O(n)Space  n = 4 CPU 4e-06 secs
+0   1   2   3   
+1   0   0   0   
+DUPLICATES: {0}
+O(n)Time O(1)Space n = 4 CPU 4e-06 secs
+0   1   2   3   
+1   0   0   0   
+-------------------------------------
+-------------------------------------
+DUPLICATES: {1, 3, 6}
+O(n^2)Time O(1)Space n = 7 CPU 4e-06 secs
+0   1   2   3   4   5   6   
+1   2   3   1   3   6   6   
+DUPLICATES: {1, 3, 6}
+O(n)Time O(n)Space  n = 7 CPU 4e-06 secs
+0   1   2   3   4   5   6   
+1   2   3   1   3   6   6   
+DUPLICATES: {1, 3, 6}
+O(n)Time O(1)Space n = 7 CPU 1.8e-05 secs
+0   1   2   3   4   5   6   
+1   2   3   1   3   6   6   
+-------------------------------------
+-------------------------------------
+DUPLICATES: {1, 3, 0}
+O(n^2)Time O(1)Space n = 7 CPU 4e-06 secs
+0   1   2   3   4   5   6   
+1   2   3   1   3   0   0   
+DUPLICATES: {1, 3, 0}
+O(n)Time O(n)Space  n = 7 CPU 4e-06 secs
+0   1   2   3   4   5   6   
+1   2   3   1   3   0   0   
+DUPLICATES: {1, 3, 0}
+O(n)Time O(1)Space n = 7 CPU 2.3e-05 secs
+0   1   2   3   4   5   6   
+1   2   3   1   3   0   0   
+-------------------------------------
+-------------------------------------
+DUPLICATES: {0}
+O(n^2)Time O(1)Space n = 3 CPU 3e-06 secs
+0   1   2   
+0   0   1   
+DUPLICATES: {0}
+O(n)Time O(n)Space  n = 3 CPU 1.7e-05 secs
+0   1   2   
+0   0   1   
+DUPLICATES: {0}
+O(n)Time O(1)Space n = 3 CPU 2.3e-05 secs
+0   1   2   
+0   0   1   
+-------------------------------------
+-------------------------------------
+O(n^2)Time O(1)Space n = 4 CPU 2e-06 secs
+0   1   2   3   
+3   2   0   1   
+O(n)Time O(n)Space  n = 4 CPU 2e-06 secs
+0   1   2   3   
+3   2   0   1   
+O(n)Time O(1)Space n = 4 CPU 2e-06 secs
+0   1   2   3   
+3   2   0   1   
+-------------------------------------
+O(n^2)Time O(1)Space n = 10000 CPU 0.113288 secs
+O(n)Time O(n)Space  n = 10000 CPU 0.000115 secs
+O(n)Time O(1)Space n = 10000 CPU 0.000114 secs
+O(n^2)Time O(1)Space n = 20000 CPU 0.430768 secs
+O(n)Time O(n)Space  n = 20000 CPU 0.000236 secs
+O(n)Time O(1)Space n = 20000 CPU 0.000206 secs
+O(n^2)Time O(1)Space n = 30000 CPU 0.992107 secs
+O(n)Time O(n)Space  n = 30000 CPU 0.000337 secs
+O(n)Time O(1)Space n = 30000 CPU 0.000297 secs
+O(n^2)Time O(1)Space n = 40000 CPU 1.75697 secs
+O(n)Time O(n)Space  n = 40000 CPU 0.000456 secs
+O(n)Time O(1)Space n = 40000 CPU 0.000658 secs
+O(n^2)Time O(1)Space n = 50000 CPU 2.75415 secs
+O(n)Time O(n)Space  n = 50000 CPU 0.00083 secs
+O(n)Time O(1)Space n = 50000 CPU 0.000474 secs
+O(n^2)Time O(1)Space n = 60000 CPU 3.96267 secs
+O(n)Time O(n)Space  n = 60000 CPU 0.000683 secs
+O(n)Time O(1)Space n = 60000 CPU 0.000654 secs
+O(n^2)Time O(1)Space n = 70000 CPU 5.40944 secs
+O(n)Time O(n)Space  n = 70000 CPU 0.000797 secs
+O(n)Time O(1)Space n = 70000 CPU 0.000679 secs
+O(n^2)Time O(1)Space n = 80000 CPU 7.24665 secs
+O(n)Time O(n)Space  n = 80000 CPU 0.00096 secs
+O(n)Time O(1)Space n = 80000 CPU 0.000944 secs
+O(n^2)Time O(1)Space n = 90000 CPU 9.04793 secs
+O(n)Time O(n)Space  n = 90000 CPU 0.00123 secs
+O(n)Time O(1)Space n = 90000 CPU 0.000962 secs
+O(n^2)Time O(1)Space n = 100000 CPU 11.1291 secs
+O(n)Time O(n)Space  n = 100000 CPU 0.0012 secs
+O(n)Time O(1)Space n = 100000 CPU 0.001066 secs
+O(n^2)Time O(1)Space n = 110000 CPU 13.3948 secs
+O(n)Time O(n)Space  n = 110000 CPU 0.001358 secs
+O(n)Time O(1)Space n = 110000 CPU 0.001102 secs
+O(n^2)Time O(1)Space n = 120000 CPU 15.8689 secs
+O(n)Time O(n)Space  n = 120000 CPU 0.001883 secs
+O(n)Time O(1)Space n = 120000 CPU 0.001368 secs
+O(n^2)Time O(1)Space n = 130000 CPU 18.5449 secs
+O(n)Time O(n)Space  n = 130000 CPU 0.001657 secs
+O(n)Time O(1)Space n = 130000 CPU 0.001473 secs
+O(n^2)Time O(1)Space n = 140000 CPU 21.5639 secs
+O(n)Time O(n)Space  n = 140000 CPU 0.001811 secs
+O(n)Time O(1)Space n = 140000 CPU 0.00157 secs
+O(n^2)Time O(1)Space n = 150000 CPU 24.7423 secs
+O(n)Time O(n)Space  n = 150000 CPU 0.002045 secs
+O(n)Time O(1)Space n = 150000 CPU 0.001853 secs
+O(n^2)Time O(1)Space n = 160000 CPU 28.0541 secs
+O(n)Time O(n)Space  n = 160000 CPU 0.002231 secs
+O(n)Time O(1)Space n = 160000 CPU 0.002269 secs
+O(n^2)Time O(1)Space n = 170000 CPU 31.8072 secs
+O(n)Time O(n)Space  n = 170000 CPU 0.002136 secs
+O(n)Time O(1)Space n = 170000 CPU 0.002019 secs
+O(n^2)Time O(1)Space n = 180000 CPU 35.6363 secs
+O(n)Time O(n)Space  n = 180000 CPU 0.002308 secs
+O(n)Time O(1)Space n = 180000 CPU 0.001957 secs
+O(n^2)Time O(1)Space n = 190000 CPU 39.7454 secs
+O(n)Time O(n)Space  n = 190000 CPU 0.002514 secs
+O(n)Time O(1)Space n = 190000 CPU 0.002671 secs
+O(n^2)Time O(1)Space n = 200000 CPU 43.9815 secs
+O(n)Time O(n)Space  n = 200000 CPU 0.0025 secs
+O(n)Time O(1)Space n = 200000 CPU 0.002255 secs
+O(n^2)Time O(1)Space n = 210000 CPU 49.3031 secs
+O(n)Time O(n)Space  n = 210000 CPU 0.002749 secs
+O(n)Time O(1)Space n = 210000 CPU 0.002337 secs
+O(n^2)Time O(1)Space n = 220000 CPU 53.8132 secs
+O(n)Time O(n)Space  n = 220000 CPU 0.002855 secs
+O(n)Time O(1)Space n = 220000 CPU 0.002544 secs
+O(n^2)Time O(1)Space n = 230000 CPU 58.6625 secs
+O(n)Time O(n)Space  n = 230000 CPU 0.003549 secs
+O(n)Time O(1)Space n = 230000 CPU 0.002666 secs
+O(n^2)Time O(1)Space n = 240000 CPU 63.8376 secs
+O(n)Time O(n)Space  n = 240000 CPU 0.003268 secs
+O(n)Time O(1)Space n = 240000 CPU 0.003165 secs
+O(n^2)Time O(1)Space n = 250000 CPU 69.1244 secs
+O(n)Time O(n)Space  n = 250000 CPU 0.003305 secs
+O(n)Time O(1)Space n = 250000 CPU 0.003366 secs
+O(n^2)Time O(1)Space n = 260000 CPU 73.1581 secs
+O(n)Time O(n)Space  n = 260000 CPU 0.00383 secs
+O(n)Time O(1)Space n = 260000 CPU 0.003412 secs
+O(n^2)Time O(1)Space n = 270000 CPU 77.9154 secs
+O(n)Time O(n)Space  n = 270000 CPU 0.003551 secs
+O(n)Time O(1)Space n = 270000 CPU 0.002898 secs
+O(n^2)Time O(1)Space n = 280000 CPU 84.0601 secs
+O(n)Time O(n)Space  n = 280000 CPU 0.003705 secs
+O(n)Time O(1)Space n = 280000 CPU 0.003095 secs
+O(n^2)Time O(1)Space n = 290000 CPU 89.8976 secs
+O(n)Time O(n)Space  n = 290000 CPU 0.003901 secs
+O(n)Time O(1)Space n = 290000 CPU 0.003167 secs
+O(n^2)Time O(1)Space n = 300000 CPU 96.2553 secs
+O(n)Time O(n)Space  n = 300000 CPU 0.003948 secs
+O(n)Time O(1)Space n = 300000 CPU 0.003276 secs
+O(n^2)Time O(1)Space n = 310000 CPU 102.991 secs
+O(n)Time O(n)Space  n = 310000 CPU 0.003987 secs
+O(n)Time O(1)Space n = 310000 CPU 0.003597 secs
+O(n^2)Time O(1)Space n = 320000 CPU 109.775 secs
+O(n)Time O(n)Space  n = 320000 CPU 0.004363 secs
+O(n)Time O(1)Space n = 320000 CPU 0.003791 secs
+O(n^2)Time O(1)Space n = 330000 CPU 117.134 secs
+O(n)Time O(n)Space  n = 330000 CPU 0.004402 secs
+O(n)Time O(1)Space n = 330000 CPU 0.004134 secs
+O(n^2)Time O(1)Space n = 340000 CPU 123.713 secs
+O(n)Time O(n)Space  n = 340000 CPU 0.004488 secs
+O(n)Time O(1)Space n = 340000 CPU 0.003943 secs
+O(n^2)Time O(1)Space n = 350000 CPU 131.221 secs
+O(n)Time O(n)Space  n = 350000 CPU 0.005246 secs
+O(n)Time O(1)Space n = 350000 CPU 0.004006 secs
+O(n^2)Time O(1)Space n = 360000 CPU 138.683 secs
+O(n)Time O(n)Space  n = 360000 CPU 0.005594 secs
+O(n)Time O(1)Space n = 360000 CPU 0.004091 secs
+O(n^2)Time O(1)Space n = 370000 CPU 147.11 secs
+O(n)Time O(n)Space  n = 370000 CPU 0.004898 secs
+O(n)Time O(1)Space n = 370000 CPU 0.004685 secs
+O(n^2)Time O(1)Space n = 380000 CPU 154.425 secs
+O(n)Time O(n)Space  n = 380000 CPU 0.005863 secs
+O(n)Time O(1)Space n = 380000 CPU 0.004336 secs
+O(n^2)Time O(1)Space n = 390000 CPU 162.95 secs
+O(n)Time O(n)Space  n = 390000 CPU 0.00498 secs
+O(n)Time O(1)Space n = 390000 CPU 0.004911 secs
+O(n^2)Time O(1)Space n = 400000 CPU 171.383 secs
+O(n)Time O(n)Space  n = 400000 CPU 0.005289 secs
+O(n)Time O(1)Space n = 400000 CPU 0.004995 secs
+O(n^2)Time O(1)Space n = 410000 CPU 180.5 secs
+O(n)Time O(n)Space  n = 410000 CPU 0.00524 secs
+O(n)Time O(1)Space n = 410000 CPU 0.004742 secs
+O(n^2)Time O(1)Space n = 420000 CPU 188.91 secs
+O(n)Time O(n)Space  n = 420000 CPU 0.005618 secs
+O(n)Time O(1)Space n = 420000 CPU 0.004677 secs
+O(n^2)Time O(1)Space n = 430000 CPU 198.276 secs
+O(n)Time O(n)Space  n = 430000 CPU 0.005568 secs
+O(n)Time O(1)Space n = 430000 CPU 0.005734 secs
+O(n^2)Time O(1)Space n = 440000 CPU 207.443 secs
+O(n)Time O(n)Space  n = 440000 CPU 0.005836 secs
+O(n)Time O(1)Space n = 440000 CPU 0.005219 secs
+O(n^2)Time O(1)Space n = 450000 CPU 217.263 secs
+O(n)Time O(n)Space  n = 450000 CPU 0.006073 secs
+O(n)Time O(1)Space n = 450000 CPU 0.005017 secs
+O(n^2)Time O(1)Space n = 460000 CPU 226.886 secs
+O(n)Time O(n)Space  n = 460000 CPU 0.006508 secs
+O(n)Time O(1)Space n = 460000 CPU 0.005213 secs
+O(n^2)Time O(1)Space n = 470000 CPU 237.08 secs
+O(n)Time O(n)Space  n = 470000 CPU 0.006245 secs
+O(n)Time O(1)Space n = 470000 CPU 0.00548 secs
+O(n^2)Time O(1)Space n = 480000 CPU 247.415 secs
+O(n)Time O(n)Space  n = 480000 CPU 0.007341 secs
+O(n)Time O(1)Space n = 480000 CPU 0.006206 secs
+O(n^2)Time O(1)Space n = 490000 CPU 257.473 secs
+O(n)Time O(n)Space  n = 490000 CPU 0.006286 secs
+O(n)Time O(1)Space n = 490000 CPU 0.006366 secs
+500000 Random test cases passed
+All test cases passed. You will get full grade now
+Include only duplicateN.h duplicateN.cpp and the output of this program for FULL grade
+
+RUN FINISHED; exit value 0; real time: 1h 12m 41s; user: 14s; system: 1h 12m 19s
