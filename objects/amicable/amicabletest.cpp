@@ -28,9 +28,9 @@ compute factor and reuse computed factors.
 int main() {
   clock_t start = clock();
 //  unsigned int n = 100000000;
-//  unsigned int n = 225;
+  unsigned int n = 221;
 //  unsigned int n = 319550;
-  unsigned int n = 100000;
+//  unsigned int n = 100000;
   amicable a(n);
   clock_t end = clock();
   double d = double(end - start) / CLOCKS_PER_SEC;

@@ -30,12 +30,13 @@ private:
   //  duplicateN(int* a, int s, bool show = false) :_a(a), _size(s), _show(show), _kount(0) {}
   //YOU can have any number of private variables
     unsigned _max; //unsigned is "unsigned int"
-    unsigned int* _arr_sums;
+    unsigned int* _prime_nums;
+    unsigned int _prime_nums_len;
   //YOU can have any number of private functions
     void _release();
     void _alloc();
     void _init_arr(const int x[], int len);
-    void _zero_fill_arr();
+    void _zero_fill_arr(unsigned int*& arr, unsigned int len);
     
     
     void _find_amicable_pairs();
@@ -44,9 +45,17 @@ private:
     unsigned int _factor_sum_loop_to_n(unsigned int cur_val);
     unsigned int _factor_sum_halfn(unsigned int cur_val);
     unsigned int _factor_sum_sqrtn(unsigned int cur_val);
-    unsigned int _factor_sum_lut(unsigned int cur_val);
+    unsigned int _factor_sum_sqrtn_primes(unsigned int cur_val);
+//    unsigned int _factor_sum_lut(unsigned int cur_val);
+    unsigned int _factor_sum_primefactorization(unsigned int cur_val);
+    unsigned int _factor_sum_stackoverflow(unsigned int cur_val);
     
-    void _fill_arr_sums(unsigned int val, unsigned int val_factor_sum);
+//    void _fill_arr_sums(unsigned int val, unsigned int val_factor_sum);
+    void _fill_prime_num(unsigned int cur_prime_num);
+    unsigned int _find_prime_factorization(unsigned int cur_val);
+    void _print_arr(unsigned int*& arr, unsigned int len);
+    unsigned int _prime_factorize(unsigned& cur_val, unsigned prime_num);
+     
 };
 
 #endif
