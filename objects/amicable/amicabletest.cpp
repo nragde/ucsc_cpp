@@ -27,8 +27,8 @@ compute factor and reuse computed factors.
 -----------------------------------------------------------------*/
 int main() {
   clock_t start = clock();
-//  unsigned int n = 100000000;
-  unsigned int n = 221;
+  unsigned int n = 100000000;
+//  unsigned int n = 221;
 //  unsigned int n = 319550;
 //  unsigned int n = 100000;
   amicable a(n);

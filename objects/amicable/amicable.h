@@ -49,6 +49,8 @@ private:
 //    unsigned int _factor_sum_lut(unsigned int cur_val);
     unsigned int _factor_sum_primefactorization(unsigned int cur_val);
     unsigned int _factor_sum_stackoverflow(unsigned int cur_val);
+    unsigned int _factor_sum_stackoverflow2(unsigned int cur_val);
+    unsigned int _factor_sum_stackoverflow3(unsigned int cur_val);
     
 //    void _fill_arr_sums(unsigned int val, unsigned int val_factor_sum);
     void _fill_prime_num(unsigned int cur_prime_num);
