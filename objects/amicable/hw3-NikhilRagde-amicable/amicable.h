@@ -29,12 +29,12 @@ private:
   //WRITE CODE
   //YOU can have any number of private variables
     unsigned _max; //unsigned is "unsigned int"
-    unsigned int* _arr;
-    unsigned int _arr_len;
+    unsigned int* _prime_nums;
+    unsigned int _prime_nums_len;
   //YOU can have any number of private functions
     void _release();
     void _alloc();
-    void _zero_fill_arr(unsigned int*& arr, unsigned int len, unsigned int fill_val = 0);
+    void _zero_fill_arr(unsigned int*& arr, unsigned int len);
     
     void _find_amicable_pairs();
     unsigned int _find_factor_sum(unsigned int cur_val);
@@ -43,10 +43,6 @@ private:
     unsigned int _factor_sum_halfn(unsigned int cur_val);
     unsigned int _factor_sum_sqrtn(unsigned int cur_val);
     unsigned int _factor_sum_primefactorization(unsigned int cur_val);
-    
-    void _find_pairs_classsolution();
-    void _fill_factor_sums();
-    unsigned int _verify_amicable_pair(unsigned int N);
     
     void _fill_prime_num(unsigned int cur_prime_num);
     unsigned int _find_prime_factorization(unsigned int cur_val);

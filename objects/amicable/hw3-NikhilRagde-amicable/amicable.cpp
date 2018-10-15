@@ -25,14 +25,13 @@ WRITE YOUR CODE HERE
 
 //Constructor
 amicable::amicable(unsigned max):
-    _max(max), _arr(nullptr), _arr_len(0){
+    _max(max), _prime_nums(nullptr), _prime_nums_len(0){
     //Allocate heap space, zero it out, and fill if necessary
 #ifdef _USEARR
     _alloc();
 #endif
         
-//    _find_amicable_pairs();
-        _find_pairs_classsolution();
+    _find_amicable_pairs();
 }
 
 amicable::~amicable(){
@@ -44,100 +43,26 @@ amicable::~amicable(){
 
 //Helper functions
 void amicable::_release(){
-    delete [] _arr;
+    delete [] _prime_nums;
 }
 
 void amicable::_alloc(){
     //LOOK_HERE: This is probably too much allocation...
-    _arr = new unsigned int[_max+1];
-    unsigned int fill_val = 1;
-    _zero_fill_arr(_arr, _max+1, fill_val);
-    _arr[0] = 0;
-    /*
-    _zero_fill_arr(_arr, _max);
-    _arr[0] = 2;
-    ++_arr_len;
-    _arr[1] = 3;
-    ++_arr_len;
-     */
+    _prime_nums = new unsigned int[_max];
+    _zero_fill_arr(_prime_nums, _max);
+    _prime_nums[0] = 2;
+    ++_prime_nums_len;
+    _prime_nums[1] = 3;
+    ++_prime_nums_len;
     
-//    _print_arr(_arr, _arr_len);
+//    _print_arr(_prime_nums, _prime_nums_len);
 }
 //Create and zero out the elements
-void amicable::_zero_fill_arr(unsigned int*& _arr, unsigned int len, unsigned int fill_val){
+void amicable::_zero_fill_arr(unsigned int*& _arr, unsigned int len){
     for(int i = 0; i < len; ++i){
-        _arr[i] = fill_val;
+        _arr[i] = 0;
     }
 }
-
-/* SOLUTION FROM THE CLASS (FOR A B+!)*/
-
-void amicable::_find_pairs_classsolution(){
-    //First, fill with factors
-    _fill_factor_sums();
-    int num_pairs = 0;
-    //Then, loop through the array and see if each element has an amicable pair
-    for(int i = 0; i <= _max; ++i){
-        //Get the amicable pair, if it exists
-        unsigned int j = _verify_amicable_pair(i);
-        //We want to make sure that both are within the "max" limits
-        if(j > i && j < _max){
-            //Print out both (if wanted)
-            cout << num_pairs << ": " << i << " & " << j << endl;
-            ++num_pairs;
-        }
-    }
-    cout << "TOTAL NUMBER: " << num_pairs << endl;
-}
-
-void amicable::_fill_factor_sums(){
-    //The array should be filled with 1s, except for _arr[0] == 0
-    //This means 0 & 1 are filled properly
-    for(unsigned int i = 2; (i*i) <= _max; ++i){
-        //Multiply i by all of the next integers
-        unsigned int k = i;
-        while(1){
-            unsigned int product = i*k;
-            //If the product is outside of our array, we're done
-            if(product > _max){
-                break;
-            }
-            //If the numbers are the same, do not double add
-            if(i == k){
-                _arr[product] += i;
-            }
-            //Otherwise, add both divisor and quotient
-            else{
-                _arr[product] += i + k;
-            }
-            //Don't forget to increment!
-            ++k;
-        }
-    }
-    
-}
-
-unsigned int amicable::_verify_amicable_pair(unsigned int N){
-    //Get the factor sum
-    unsigned int sum1 = _arr[N];
-    //If the sum is outside the bounds, skip it since it's outside the bounds
-    if(sum1 <= _max){
-        //Get the factor sum of the factor sum
-        unsigned int sum2 = _arr[sum1];
-        //If this is the same as the initial number, we've found a pair!
-        if(sum2 == N){
-            return sum1;
-        }
-    }
-    return 0;
-}
-
-
-
-
-/* SOLUTION FROM THE CLASS (FOR A B+!)*/
-
-
 
 void amicable::_find_amicable_pairs(){
     int total_num = 0;
@@ -182,7 +107,7 @@ void amicable::_find_amicable_pairs(){
     }
 #ifdef _PRINTPRIMES
     cout << "PRIMES!!!!!!!!!!!" <<endl;
-    _print_arr(_arr, _arr_len);
+    _print_arr(_prime_nums, _prime_nums_len);
 #endif
     cout << "TOTAL NUMBER: " << total_num << endl;
 }
@@ -246,8 +171,8 @@ unsigned int amicable::_factor_sum_primefactorization(unsigned int cur_val){
     
     unsigned int loop_limit = sqrt(min(cur_val,_max));
     //Loop through known prime numbers up to (inclusive) the sqrt(cur_val)
-    for(int i = 0; _arr[i] <= loop_limit; ++i){
-        unsigned int prime_num = _arr[i];
+    for(int i = 0; _prime_nums[i] <= loop_limit; ++i){
+        unsigned int prime_num = _prime_nums[i];
         if(prime_num == 0){
             break;
         }
@@ -285,19 +210,19 @@ void amicable::_fill_prime_num(unsigned int cur_prime_num){
     if(cur_prime_num <= sqrt(_max)){
         //Check that the current value at "_prime_num_len" holds a 0, if not
         // increment so that the next empty value is picked
-        if(_arr[_arr_len] != 0){
-            ++_arr_len;
+        if(_prime_nums[_prime_nums_len] != 0){
+            ++_prime_nums_len;
         }
         //Verify that the current number is greater than the previous number
-        if(_arr_len != 0 && _arr[_arr_len-1] < cur_prime_num){
+        if(_prime_nums_len != 0 && _prime_nums[_prime_nums_len-1] < cur_prime_num){
         //Put in the current prime number and then increment the length var
-            _arr[_arr_len] = cur_prime_num;
-            ++_arr_len;
+            _prime_nums[_prime_nums_len] = cur_prime_num;
+            ++_prime_nums_len;
         }
-        else if(_arr_len == 0){
+        else if(_prime_nums_len == 0){
             //Put in the current prime number and then increment the length var
-            _arr[_arr_len] = cur_prime_num;
-            ++_arr_len;
+            _prime_nums[_prime_nums_len] = cur_prime_num;
+            ++_prime_nums_len;
         }
     }
 }
@@ -313,7 +238,7 @@ unsigned int amicable::_prime_factorize(unsigned int &N, unsigned int prime){
     //  This simplifies to (1 + p1^1 + p1^2 + .... + p1^m)*(1+p2^1 + p2^2 + ... p2^n)
     //  
     
-    //In this function, we figure out if a specific Pi (i=0...._arr_len)
+    //In this function, we figure out if a specific Pi (i=0...._prime_nums_len)
     // is a prime factor of N
     //If it is, we keep going until we figure out whole sum of this 1+Pi^1+...+Pi^m
     unsigned int Pi_sum = 1;
