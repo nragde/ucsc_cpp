@@ -31,9 +31,8 @@ static void test1(int n, bool show) {
     cout << "sqrt(" << n << " )= " << s.ans() << " Num steps = " << s.steps() << endl;
   }
 //  unsigned int gold = unsigned int(sqrt(n));
-//  unsigned int gold = sqrt(n);
-unsigned int gold = (unsigned int)sqrt(n);
-    util u;
+    unsigned int gold = unsigned(sqrt(n));
+  util u;
   assert(s.ans() == gold);
 }
 
@@ -44,7 +43,8 @@ static void test() {
   const unsigned int a[] = { 0,1,2,9,10,11,24,99,100,1986,89067,4444,1230000 };
   int s = sizeof(a) / sizeof(unsigned int);
   for (int i = 0; i < s; ++i) {
-    unsigned j = unsigned(i);
+//    unsigned int j = unsigned int(a[i]);
+      unsigned int j = unsigned(a[i]);
     test1(j, true);
   }
   {

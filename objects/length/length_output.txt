@@ -1,0 +1,25 @@
+length_easy y = 4
+length_tough y = 4
+Assert passed
+length_easy y = 4
+length_tough y = 4
+Assert passed
+length_easy y = 0
+length_tough y = 0
+Assert passed
+length_easy y = 4
+length_tough y = 4
+Assert passed
+length_easy y = 4
+length_tough y = 4
+Assert passed
+length_easy y = 4
+length_tough y = 4
+Assert passed
+length_easy y = 4
+length_tough y = 4
+Assert passed
+5000 Random tests passed
+You are genius. Bring a box of candies for me
+Attach only length.cpp and output of this program as a pdf file for A grade
+Program ended with exit code: 0
