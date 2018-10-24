@@ -22,10 +22,17 @@ WRITE CODE
 class GraphBuilder {
 public:
     GraphBuilder(Graph& gin, const vector<string>& sin);
+    // Don't really need a destructor, but putting in for clarity
+    ~GraphBuilder(){ }
+    //Don't want copy or equal operator
+    GraphBuilder(const GraphBuilder& builder) = delete;
+    GraphBuilder& operator=(const GraphBuilder& builder) = delete;
 private:
+    //Private variables (both are references, assigned at instantiation)
     Graph& _g;
     const vector<string>& _s;
     
+    //Private helper functions, to make the code more readable
     void _build_graph();
     int _attempt_to_add_node(const string& name);
 };

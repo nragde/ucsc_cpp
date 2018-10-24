@@ -26,14 +26,20 @@ void Graph::buildGraph(const vector<string>& s) {
 }
 
 // https://stackoverflow.com/questions/6576109/initialising-reference-in-constructor-c
-GraphBuilder::GraphBuilder(Graph& gin, const vector<string>& sin):
-_g(gin), _s(sin){
+GraphBuilder::GraphBuilder(Graph& gin, const vector<string>& sin): _g(gin), _s(sin){
+    //Whenever an object is instantiated (i.e. when Graph::buildGraph is called)
+    // we should automatically compose the Graph described by the inputted vector
     _build_graph();
 }
 
 void GraphBuilder::_build_graph(){
     // enum Type { NONE = 0, UNDIRECTED, DIRECTED, WEIGHTED_UNDIRECTED, WEIGHTED_DIRECTED };
     GraphType::Type type = _g.getType();
+    //This shouldn't be necessary, but if the GraphType is NONE, we should just hop right out
+    // since we otherwise have no idea of how to handle this...
+    if(type == GraphType::Type::NONE){
+        return;
+    }
     // If it's undirected, we need to make sure to write info in both directions
     bool is_undirected = false;
     if(type == GraphType::Type::UNDIRECTED or type == GraphType::Type::WEIGHTED_UNDIRECTED){
@@ -52,13 +58,15 @@ void GraphBuilder::_build_graph(){
         //Take out the strings of information from the inputted info string
         int from_ind = x*mod_step;
         int to_ind = from_ind + 1;
-        int weight_ind = from_ind + 2;
         string from = _s[from_ind];
         string to = _s[to_ind];
         string sweight = "0";
+        //If it's weighted, pull the weight string out of the vector
         if(mod_step == 3){
+            int weight_ind = from_ind + 2;
             sweight = _s[weight_ind];
         }
+        //Convert from a string to a double; needed to create an edge
         weight = _g.string2double(sweight);
         
         // Add nodes if necessary and get the num value of each

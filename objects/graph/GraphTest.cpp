@@ -25,7 +25,7 @@ ONLY CHANGE HERE: Where do you want to write your graph dot file?
 #ifdef _WIN32
 const char* dotFileBase = "C:\\junk\\";
 #else
-const char* dotFileBase = "/home/jag/junk/";
+const char* dotFileBase = "/Users/nragde3/Documents/ucsc_cpp/dot_files/";
 #endif
 
 /*----------------------------------------------------------------
