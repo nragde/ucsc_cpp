@@ -42,6 +42,8 @@ STL
 #include <stdexcept> //Without this catch will NOT work on Linux
 #include <vector>
 #include <string>
+#include <set>
+#include <map>
 #include <algorithm> //for std::reverse
 
 /*--------------------------------------------------------
@@ -50,8 +52,8 @@ class random number generator
 class Random {
 public:
   Random() { srand((unsigned)time(0)); }
-  int get_random_number(int a = 0, int b = 10000) const {
-    int upper_bound, lower_bound;
+  unsigned int get_random_number(unsigned int a = 0, unsigned int b = 10000) const {
+    unsigned int upper_bound, lower_bound;
     if (a < b) { upper_bound = b - a; lower_bound = a; } else if (a >= b) { upper_bound = a - b; lower_bound = b; }
 
     return(lower_bound + rand() % upper_bound);
