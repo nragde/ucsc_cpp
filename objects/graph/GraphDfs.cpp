@@ -26,13 +26,8 @@ void Graph::dfs(const char* t, const string& s, bool& cycle, int& work, vector<s
 //vector<string> ans : a vector that should list topology, when appropriate
 //bool cycle : true if there's a cycle in the loop, false if there isn't
 //int work: number of "hops" you must make to perform the DFS
-//bool _print : an internal bool that determines if anything should be printed
 GraphDfs::GraphDfs(Graph& gin, const char* tin, const string& sin, bool& cycle_in, int& work_in, vector<string>& ans_in):
-_g(gin), _t(tin), _s(sin), _cycle(cycle_in), _work(work_in), _ans(ans_in), _print(false){
-    const char t_test = *_t;
-    if(*_t){
-        _print = true;
-    }
+_g(gin), _t(tin), _s(sin), _cycle(cycle_in), _work(work_in), _ans(ans_in) {
     //Do the DFS work
     _perform_dfs();
     //If valid, do the DFS assert check
@@ -42,7 +37,7 @@ _g(gin), _t(tin), _s(sin), _cycle(cycle_in), _work(work_in), _ans(ans_in), _prin
         bool proper_topology = _verify_dfs_topology();
         assert(proper_topology);
     }
-    //Print if the tin is not an empty string!
+    //Print if the first string is not empty!
     if(*_t){
         cout << _t << endl;
         cout << "Num Vertices = " << _g.getnumV() << endl;
@@ -55,11 +50,15 @@ _g(gin), _t(tin), _s(sin), _cycle(cycle_in), _work(work_in), _ans(ans_in), _prin
         for(int i = 0 ; i < _ans.size(); ++i){
             cout << _ans[i] << " ";
         }
-        cout << endl;
+        if(_cycle){
+            cout << endl << "This order has no meaning" << endl;
+        }
         if((g_type == GraphType::Type::DIRECTED or g_type == GraphType::Type::WEIGHTED_DIRECTED) and not _cycle){
             //We will only get here if it's a valid DFS check and the assert passed when the method was initially run
-            cout << "dfs assert passed" << endl;
+            cout << endl << "dfs assert passed" << endl;
         }
+        
+        cout << endl;
     }
 }
 
@@ -70,6 +69,7 @@ void GraphDfs::_perform_dfs(){
     _set_to_unvisited();
     int start_node = _g.graphHasNode(_s);
     assert(start_node != -1);
+    //Recursively perform the DFR in a helper function
     _dfs_r(start_node);
 }
 
@@ -80,7 +80,7 @@ void GraphDfs::_perform_dfs(){
 void GraphDfs::_dfs_r(int node_num){
     //Increment our work counter
     ++_work;
-    //If it's green, make it blue
+    //If it's green, make it blue since we've visited
     if(_g.getTemp(node_num) == NodeColor::GREEN){
         _g.setTemp(node_num, NodeColor::BLUE);
         //This node is visited, so visit all of its fanout nodes next

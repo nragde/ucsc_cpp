@@ -29,7 +29,6 @@ private:
     bool& _cycle;
     int& _work;
     vector<string>& _ans;
-    bool _print;
     
     enum NodeColor { GREEN = 1, BLUE, RED,};
     

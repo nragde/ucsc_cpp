@@ -52,8 +52,24 @@ void GraphBuilder::_build_graph(){
     if(type == GraphType::Type::WEIGHTED_UNDIRECTED or type == GraphType::Type::WEIGHTED_DIRECTED){
         mod_step = 3;
     }
-    //Create nodes and edges and put into our graph _g
+// (BEGIN) HOW JAG DID IT
+    //(DOESN'T REDEFINE INSERTORFIND AND ENSURE NODES EXIST WHEN EDGES ARE CREATED - OR FAILS)
+    //Add just the nodes to the graph first
     unsigned long info_size = _s.size();
+    for(int x = 0; x < info_size/mod_step; ++x){
+        //Take out the strings of information from the inputted info string
+        int from_ind = x*mod_step;
+        int to_ind = from_ind + 1;
+        string from = _s[from_ind];
+        string to = _s[to_ind];
+        
+        // Add nodes (if they don't already exist) --> insertOrFind won't add duplicates
+        // Note: We don't care about the output here, since they're not used until edges
+        _g.insertOrFind(from, false);
+        _g.insertOrFind(to, false);
+    }
+
+    //Now generate the edges (and confirm the nodes are inserted
     for(int x = 0; x < info_size/mod_step; ++x){
         //Take out the strings of information from the inputted info string
         int from_ind = x*mod_step;
@@ -69,9 +85,9 @@ void GraphBuilder::_build_graph(){
         //Convert from a string to a double; needed to create an edge
         weight = _g.string2double(sweight);
         
-        // Add nodes if necessary and get the num value of each
-        int from_num = _attempt_to_add_node(from);
-        int to_num = _attempt_to_add_node(to);
+        // Get node number from the graph
+        int from_num = _g.insertOrFind(from, true);
+        int to_num = _g.insertOrFind(to, true);
         
         //Add the edges
         // For directed, from->to should be added to from's fan-out
@@ -85,6 +101,43 @@ void GraphBuilder::_build_graph(){
             _g.createEdge(to_num, from_num, weight, true);
         }
     }
+// (END) HOW JAG DID IT
+
+    // HOW I DID IT
+    //(DOESN'T UTILIZE THE BUILT IN FUNCTIONS PROPERLY AND DOESN'T USE THE ASSERT ASPECT OF INSERTORFIND)
+//    //Create nodes and edges and put into our graph _g
+//    unsigned long info_size = _s.size();
+//    for(int x = 0; x < info_size/mod_step; ++x){
+//        //Take out the strings of information from the inputted info string
+//        int from_ind = x*mod_step;
+//        int to_ind = from_ind + 1;
+//        string from = _s[from_ind];
+//        string to = _s[to_ind];
+//        string sweight = "0";
+//        //If it's weighted, pull the weight string out of the vector
+//        if(mod_step == 3){
+//            int weight_ind = from_ind + 2;
+//            sweight = _s[weight_ind];
+//        }
+//        //Convert from a string to a double; needed to create an edge
+//        weight = _g.string2double(sweight);
+//
+//        // Add nodes if necessary and get the num value of each
+//        int from_num = _attempt_to_add_node(from);
+//        int to_num = _attempt_to_add_node(to);
+//
+//        //Add the edges
+//        // For directed, from->to should be added to from's fan-out
+//        //               to->from should be added to to's fan-in
+//        _g.createEdge(from_num, to_num, weight, true);
+//        _g.createEdge(to_num, from_num, weight, false);
+//        //If undirected, we also need to add edges the other way as well
+//        // BUT, not if it's a self-loop (as this would make it seem like a double loop!)
+//        if(is_undirected and from_num != to_num){
+//            _g.createEdge(from_num, to_num, weight, false);
+//            _g.createEdge(to_num, from_num, weight, true);
+//        }
+//    }
 }
 
 int GraphBuilder::_attempt_to_add_node(const string& node_name){
