@@ -316,8 +316,8 @@ void GraphTest::_testDFS() {
 
 -----------------------------------------------------------------*/
 void GraphTest::_testBed() {
-  _testGraphRepresentation();
-  //_testDFS();  //Next assignment.
+//  _testGraphRepresentation();
+  _testDFS();  //Next assignment.
 }
 
 /*----------------------------------------------------------------
