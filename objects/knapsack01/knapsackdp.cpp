@@ -25,7 +25,6 @@ int knapsackdp::_find_ans(int* value_arr, int* steal_arr, int num_elements){
 #ifdef _DEBUG0
             cout << endl << endl << "NUM ITEMS: " << cur_numitems << ", CUR BAGSIZE: " << cur_bagsize << endl;
 #endif
-//            int index_in_1d = items*_numitems+bag;
             //If there are no items (items ==0) or if our bagsize is 0 (bag == 0)
             // it's impossible to steal anything
             // (i.e. the first row and first column should always be 0)
@@ -51,6 +50,7 @@ int knapsackdp::_find_ans(int* value_arr, int* steal_arr, int num_elements){
                 int cur_val = 0;
                 int should_steal = 0;
                 _should_we_steal(value_arr, cur_numitems, cur_bagsize, cur_val, should_steal);
+                //Plug in the appropriate values into the V- and k- arrays
                 _set_2d_val(value_arr, cur_numitems, cur_bagsize, cur_val);
                 _set_2d_val(steal_arr, cur_numitems, cur_bagsize, should_steal);
 #ifdef _DEBUG0
@@ -61,29 +61,28 @@ int knapsackdp::_find_ans(int* value_arr, int* steal_arr, int num_elements){
             }
         }
     }
-    
     //The bottom rightmost element in our "2D array" is the maximum value to steal with our given _bagsize
     return value_arr[num_elements-1];
 }
 
 void knapsackdp::_should_we_steal(int* value_arr, int cur_numitems, int cur_bagsize, int& cur_val, int& should_steal){
-    //Get the info for the latest
+    //Get the info for the current item
     int cur_w = _weights[cur_numitems-1];
-//    int cur_v = _values[cur_numitems-1];
     
     //Get the previous max value for this bag size
     int prev_max_value = _get_2d_val(value_arr, cur_numitems-1, cur_bagsize);
     bool we_stole = false;
     int this_item_max = 0;
     if(cur_w <= cur_bagsize){
-        //We *may* be able to steal this current item
+        //We *may* be able to steal this current item, so get the maximum value if we DO steal it
         this_item_max = _get_stealable_value(value_arr, cur_numitems, cur_bagsize);
-        
+        //If this stealing this item yields a better (or equal) return as previously found,
+        // we should steal it
         if(this_item_max >= prev_max_value){
             we_stole = true;
         }
     }
-    
+    //If we stole, this item's value matters and we should set our steal variable to 1 (aka YES)
     if(we_stole){
         cur_val = this_item_max;
         should_steal = 1;
@@ -97,26 +96,35 @@ void knapsackdp::_should_we_steal(int* value_arr, int cur_numitems, int cur_bags
 
 int knapsackdp::_get_stealable_value(const int* value_arr, int cur_numitems, int w) const{
     int this_val = 0;
-    //Get the info for the latest
+    //Get the info for the current item
     int cur_w = _weights[cur_numitems-1];
     int cur_v = _values[cur_numitems-1];
+    //We are definitely stealing this, so update our running tally of the weight and value
     this_val += cur_v;
     w -= cur_w;
+    //Since we're utitlizing DYNAMIC PROGRAMMING, this step is now VERY easy
+    // Instead of looping to find the value, we simply look for the previously calculated
+    // value for the previous set of items at the bag size we have remaining
     int max_remaining = _get_2d_val(value_arr, cur_numitems-1, w);
+    //Regardless of what that value is, we know it's the maximum for that item set and bag size
+    // so add it to our current running value and return it
     this_val += max_remaining;
     return this_val;
 }
 
-void knapsackdp::_set_2d_val(int* arr, int cur_num_items, int cur_bagsize, int value){
+//Set in a 1d arr using 2d indicies.
+void knapsackdp::_set_2d_val(int* arr, const int cur_num_items, const int cur_bagsize, const int value){
     int index_in_1d = cur_num_items * (_bagsize+1) + cur_bagsize;
     arr[index_in_1d] = value;
 }
 
+//Retrieve from a 1d arr using 2d indicies. Everything is const because we don't want to modify anything.
 int knapsackdp::_get_2d_val(const int* arr, const int cur_num_items, const int cur_bagsize) const{
     int index_in_1d = cur_num_items * (_bagsize+1) + cur_bagsize;
     return arr[index_in_1d];
 }
 
+//Initialize an array with an inputted value (0 is default)
 void knapsackdp::_init_arr(int* arr, int num_elements, int val){
     for(int i = 0; i < num_elements; ++i){
         arr[i] = val;
@@ -129,6 +137,7 @@ void knapsackdp::_print_arr(const int* arr, int num_elements, const char* title,
         // print as 2d
         assert(num_elements == rows*cols);
         cout << title ;
+        //Go row by row and col by col
         for(int r = 0; r < rows; ++r){
             for(int c = 0; c < cols; ++c){
                 int index_1d = r*cols + c;
@@ -136,7 +145,6 @@ void knapsackdp::_print_arr(const int* arr, int num_elements, const char* title,
             }
             cout << endl;
         }
-        
     }
     else{
         //Print as 1 row
@@ -149,9 +157,9 @@ void knapsackdp::_print_arr(const int* arr, int num_elements, const char* title,
     }
 }
 
-void knapsackdp::_print_output(const int* value_arr, const int* steal_arr, const int total_elements, const char* title){
+void knapsackdp::_print_output(const int* value_arr, const int* steal_arr, const int total_elements){
     //Print stuff!
-    cout << left_title_header << title << right_title_header << endl;
+    cout << left_title_header << _t << right_title_header << endl;
     _print_arr(value_arr, total_elements, "------------ V matrix ----------------\n", true, _numitems+1, _bagsize + 1);
     _print_arr(steal_arr, total_elements, "------------ k matrix ----------------\n", true, _numitems+1, _bagsize + 1);
     //Print out the indices (manually)
@@ -162,7 +170,7 @@ void knapsackdp::_print_output(const int* value_arr, const int* steal_arr, const
     cout << endl;
     _print_arr(_weights, _numitems, "w = ");
     _print_arr(_values, _numitems, "v = ");
-//    cout << "Max Value of " << _max_value << " can obtained from items {" << 3,1 << "} that has values {" << 4+5 << "=" << _max_value<<"}" << endl;
+    //Print the summary string (in the format provided)
     vector<int> stolen_items, stolen_values;
     _determine_items_values(value_arr, steal_arr, stolen_items, stolen_values);
     cout << "Max Value of " << _max_value << " can obtained from items {";
@@ -173,18 +181,16 @@ void knapsackdp::_print_output(const int* value_arr, const int* steal_arr, const
 
 }
 
+//Hop through the arrays to figure out which items were stolen, and what their individual values were
 void knapsackdp::_determine_items_values(const int* value_arr, const int* steal_arr, vector<int>& stolen_items, vector<int>& stolen_values){
-    //Start at last row and last column
-//    for(int cur_num_items = _numitems)
-//    int cur_r = _numitems;
-//    int cur_c = _bagsize;
     //Get the info for the latest
     int cur_bagsize = _bagsize;
     for(int cur_num_items = _numitems; cur_num_items > 0; --cur_num_items){
         int cur_w = _weights[cur_num_items-1];
         int cur_v = _values[cur_num_items-1];
-        
+        //The steal array will tell us if we stole the current item
         int did_steal = _get_2d_val(steal_arr, cur_num_items, cur_bagsize);
+        //If we did steal this current item, add the appropriate info to the vectors and update the remaining bag size
         if(did_steal){
             stolen_items.push_back(cur_num_items);
             stolen_values.push_back(cur_v);
@@ -193,9 +199,11 @@ void knapsackdp::_determine_items_values(const int* value_arr, const int* steal_
     }
 }
 
+//Print out a vector from start to end, with an optional second input for a delimiter character
 void knapsackdp::_print_vector(const vector<int>& vec, const char* delim){
     for(int i = 0; i < vec.size();){
         cout << vec[i];
+        //Increment the index here, and only print the delimiter if the loop will continue
         if(++i != vec.size()){
             cout << delim;
         }

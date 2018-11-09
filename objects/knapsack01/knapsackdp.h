@@ -36,34 +36,28 @@ protected:
       _weights = w;
       _values = v;
       _max_value = 0;
-//      void _print_arr(const int* arr, int num_elements, const char* title="", bool print2d=false, int rows=0, int cols=0);
-//      int temp_arr[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-//      _print_arr(temp_arr, 9, "TEST", true, 3, 3);
+      //Initialize the arrays that hold values and info on stolen/not stolen
       int total_elements = (_numitems+1)*(_bagsize+1);
       int value_arr[total_elements];
       int steal_arr[total_elements];
       _init_arr(value_arr, total_elements, -1);
       _init_arr(steal_arr, total_elements, -1);
-      
+      //Use dynamic programming programming to find the best combo of items to steal, given a bag size
       _max_value = _find_ans(value_arr, steal_arr, total_elements);
-      
-      //Print stuff!
+      //Print stuff, if a title is provided
       if(t){
-          _print_output(value_arr, steal_arr, total_elements, t);
+          _print_output(value_arr, steal_arr, total_elements);
       }
+      //Save the maximum stolen value in the passed in answer variable
       ans = _max_value;
   }
 private:
   //You can have any number of private variables
-    int ff[6][6];
-    int** jj;
-    
     //Constant values for formatting the printed output
     const int _print_width = 4;
-//    const char* matrix_header = "----------------";
     const char* left_title_header = "-------------------------- ";
     const char* right_title_header = " ------------------------";
-    
+    // Object-level variables for the inputted variables
     const char* _t;
     int _bagsize;
     int _numitems;
@@ -76,14 +70,14 @@ private:
     void _should_we_steal(int* value_arr, int cur_numitems, int cur_bagsize, int& cur_val, int& should_steal);
     int _get_stealable_value(const int* value_arr, int cur_numitems, int w) const;
     void _determine_items_values(const int* value_arr, const int* steal_arr, vector<int>& stolen_items, vector<int>& stolen_values);
-    
+    //Arr specfic functions
     void _init_arr(int* arr, int num_elements, int val=0);
     //const int *arr, because we don't want to change when printing
     void _print_arr(const int* arr, int num_elements, const char* title="", bool print2d=false, int rows=0, int cols=0);
-    void _print_output(const int* value_arr, const int* steal_arr, const int total_elements, const char* title);
+    void _print_output(const int* value_arr, const int* steal_arr, const int total_elements);
     void _print_vector(const vector<int>& vec, const char* delim="");
-    
-    void _set_2d_val(int* arr, int cur_num_items, int cur_bagsize, int value);
+    //Provide 2d indicies, get back value (the 1d conversion is done internally)
+    void _set_2d_val(int* arr, const int cur_num_items, const int cur_bagsize, const int value);
     int _get_2d_val(const int* arr, const int cur_num_items, const int cur_bagsize) const;
 };
 
